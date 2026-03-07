@@ -1,0 +1,154 @@
+{
+  "steps": [
+    {
+      "brickId": "InventoryLegoBrick_250",
+      "targetPosition": { "x": 0.0, "y": 1.0, "z": 0.0 },
+      "targetRotation": { "x": 0.0, "y": 0.0, "z": 0.0 },
+      "delay": 0.2
+    },
+    {
+      "brickId": "InventoryLegoBrick_249",
+      "targetPosition": { "x": 5.5, "y": 1.0, "z": 0.0 },
+      "targetRotation": { "x": 0.0, "y": 0.0, "z": 0.0 },
+      "delay": 0.2
+    },
+    {
+      "brickId": "InventoryLegoBrick_248",
+      "targetPosition": { "x": 11.0, "y": 1.0, "z": 0.0 },
+      "targetRotation": { "x": 0.0, "y": 0.0, "z": 0.0 },
+      "delay": 0.2
+    },
+    {
+      "brickId": "InventoryLegoBrick_247",
+      "targetPosition": { "x": 16.5, "y": 1.0, "z": 0.0 },
+      "targetRotation": { "x": 0.0, "y": 0.0, "z": 0.0 },
+      "delay": 0.2
+    },
+    {
+      "brickId": "InventoryLegoBrick_246",
+      "targetPosition": { "x": 22.0, "y": 1.0, "z": 0.0 },
+      "targetRotation": { "x": 0.0, "y": 0.0, "z": 0.0 },
+      "delay": 0.2
+    },
+    {
+      "brickId": "InventoryLegoBrick_245",
+      "targetPosition": { "x": 0.0, "y": 3.0, "z": 0.0 },
+      "targetRotation": { "x": 0.0, "y": 0.0, "z": 0.0 },
+      "delay": 0.2
+    },
+    {
+      "brickId": "InventoryLegoBrick_244",
+      "targetPosition": { "x": 5.5, "y": 3.0, "z": 0.0 },
+      "targetRotation": { "x": 0.0, "y": 0.0, "z": 0.0 },
+      "delay": 0.2
+    },
+    {
+      "brickId": "InventoryLegoBrick_243",
+      "targetPosition": { "x": 11.0, "y": 3.0, "z": 0.0 },
+      "targetRotation": { "x": 0.0, "y": 0.0, "z": 0.0 },
+      "delay": 0.2
+    },
+    {
+      "brickId": "InventoryLegoBrick_242",
+      "targetPosition": { "x": 16.5, "y": 3.0, "z": 0.0 },
+      "targetRotation": { "x": 0.0, "y": 0.0, "z": 0.0 },
+      "delay": 0.2
+    },
+    {
+      "brickId": "InventoryLegoBrick_241",
+      "targetPosition": { "x": 22.0, "y": 3.0, "z": 0.0 },
+      "targetRotation": { "x": 0.0, "y": 0.0, "z": 0.0 },
+      "delay": 0.2
+    },
+    {
+      "brickId": "InventoryLegoBrick_240",
+      "targetPosition": { "x": 0.0, "y": 5.0, "z": 0.0 },
+      "targetRotation": { "x": 0.0, "y": 0.0, "z": 0.0 },
+      "delay": 0.2
+    },
+    {
+      "brickId": "InventoryLegoBrick_239",
+      "targetPosition": { "x": 5.5, "y": 5.0, "z": 0.0 },
+      "targetRotation": { "x": 0.0, "y": 0.0, "z": 0.0 },
+      "delay": 0.2
+    },
+    {
+      "brickId": "InventoryLegoBrick_238",
+      "targetPosition": { "x": 11.0, "y": 5.0, "z": 0.0 },
+      "targetRotation": { "x": 0.0, "y": 0.0, "z": 0.0 },
+      "delay": 0.2
+    },
+    {
+      "brickId": "InventoryLegoBrick_237",
+      "targetPosition": { "x": 16.5, "y": 5.0, "z": 0.0 },
+      "targetRotation": { "x": 0.0, "y": 0.0, "z": 0.0 },
+      "delay": 0.2
+    },
+    {
+      "brickId": "InventoryLegoBrick_236",
+      "targetPosition": { "x": 22.0, "y": 5.0, "z": 0.0 },
+      "targetRotation": { "x": 0.0, "y": 0.0, "z": 0.0 },
+      "delay": 0.2
+    },
+    {
+      "brickId": "InventoryLegoBrick_235",
+      "targetPosition": { "x": 0.0, "y": 7.0, "z": 0.0 },
+      "targetRotation": { "x": 0.0, "y": 0.0, "z": 0.0 },
+      "delay": 0.2
+    },
+    {
+      "brickId": "InventoryLegoBrick_234",
+      "targetPosition": { "x": 5.5, "y": 7.0, "z": 0.0 },
+      "targetRotation": { "x": 0.0, "y": 0.0, "z": 0.0 },
+      "delay": 0.2
+    },
+    {
+      "brickId": "InventoryLegoBrick_233",
+      "targetPosition": { "x": 11.0, "y": 7.0, "z": 0.0 },
+      "targetRotation": { "x": 0.0, "y": 0.0, "z": 0.0 },
+      "delay": 0.2
+    },
+    {
+      "brickId": "InventoryLegoBrick_232",
+      "targetPosition": { "x": 16.5, "y": 7.0, "z": 0.0 },
+      "targetRotation": { "x": 0.0, "y": 0.0, "z": 0.0 },
+      "delay": 0.2
+    },
+    {
+      "brickId": "InventoryLegoBrick_231",
+      "targetPosition": { "x": 22.0, "y": 7.0, "z": 0.0 },
+      "targetRotation": { "x": 0.0, "y": 0.0, "z": 0.0 },
+      "delay": 0.2
+    },
+    {
+      "brickId": "InventoryLegoBrick_230",
+      "targetPosition": { "x": 0.0, "y": 9.0, "z": 0.0 },
+      "targetRotation": { "x": 0.0, "y": 0.0, "z": 0.0 },
+      "delay": 0.2
+    },
+    {
+      "brickId": "InventoryLegoBrick_229",
+      "targetPosition": { "x": 5.5, "y": 9.0, "z": 0.0 },
+      "targetRotation": { "x": 0.0, "y": 0.0, "z": 0.0 },
+      "delay": 0.2
+    },
+    {
+      "brickId": "InventoryLegoBrick_228",
+      "targetPosition": { "x": 11.0, "y": 9.0, "z": 0.0 },
+      "targetRotation": { "x": 0.0, "y": 0.0, "z": 0.0 },
+      "delay": 0.2
+    },
+    {
+      "brickId": "InventoryLegoBrick_227",
+      "targetPosition": { "x": 16.5, "y": 9.0, "z": 0.0 },
+      "targetRotation": { "x": 0.0, "y": 0.0, "z": 0.0 },
+      "delay": 0.2
+    },
+    {
+      "brickId": "InventoryLegoBrick_226",
+      "targetPosition": { "x": 22.0, "y": 9.0, "z": 0.0 },
+      "targetRotation": { "x": 0.0, "y": 0.0, "z": 0.0 },
+      "delay": 0.2
+    }
+  ]
+}

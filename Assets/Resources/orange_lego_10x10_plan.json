@@ -1,0 +1,1404 @@
+{
+    "steps":  [
+                  {
+                      "brickId":  "InventoryOrangeLegoBrick_250",
+                      "targetPosition":  {
+                                             "x":  -18,
+                                             "y":  0.48,
+                                             "z":  0
+                                         },
+                      "targetRotation":  {
+                                             "x":  0,
+                                             "y":  0,
+                                             "z":  0
+                                         },
+                      "delay":  0.05
+                  },
+                  {
+                      "brickId":  "InventoryOrangeLegoBrick_249",
+                      "targetPosition":  {
+                                             "x":  -13.95,
+                                             "y":  0.48,
+                                             "z":  0
+                                         },
+                      "targetRotation":  {
+                                             "x":  0,
+                                             "y":  0,
+                                             "z":  0
+                                         },
+                      "delay":  0.05
+                  },
+                  {
+                      "brickId":  "InventoryOrangeLegoBrick_248",
+                      "targetPosition":  {
+                                             "x":  -9.9,
+                                             "y":  0.48,
+                                             "z":  0
+                                         },
+                      "targetRotation":  {
+                                             "x":  0,
+                                             "y":  0,
+                                             "z":  0
+                                         },
+                      "delay":  0.05
+                  },
+                  {
+                      "brickId":  "InventoryOrangeLegoBrick_247",
+                      "targetPosition":  {
+                                             "x":  -5.85,
+                                             "y":  0.48,
+                                             "z":  0
+                                         },
+                      "targetRotation":  {
+                                             "x":  0,
+                                             "y":  0,
+                                             "z":  0
+                                         },
+                      "delay":  0.05
+                  },
+                  {
+                      "brickId":  "InventoryOrangeLegoBrick_246",
+                      "targetPosition":  {
+                                             "x":  -1.8,
+                                             "y":  0.48,
+                                             "z":  0
+                                         },
+                      "targetRotation":  {
+                                             "x":  0,
+                                             "y":  0,
+                                             "z":  0
+                                         },
+                      "delay":  0.05
+                  },
+                  {
+                      "brickId":  "InventoryOrangeLegoBrick_245",
+                      "targetPosition":  {
+                                             "x":  2.25,
+                                             "y":  0.48,
+                                             "z":  0
+                                         },
+                      "targetRotation":  {
+                                             "x":  0,
+                                             "y":  0,
+                                             "z":  0
+                                         },
+                      "delay":  0.05
+                  },
+                  {
+                      "brickId":  "InventoryOrangeLegoBrick_244",
+                      "targetPosition":  {
+                                             "x":  6.3,
+                                             "y":  0.48,
+                                             "z":  0
+                                         },
+                      "targetRotation":  {
+                                             "x":  0,
+                                             "y":  0,
+                                             "z":  0
+                                         },
+                      "delay":  0.05
+                  },
+                  {
+                      "brickId":  "InventoryOrangeLegoBrick_243",
+                      "targetPosition":  {
+                                             "x":  10.35,
+                                             "y":  0.48,
+                                             "z":  0
+                                         },
+                      "targetRotation":  {
+                                             "x":  0,
+                                             "y":  0,
+                                             "z":  0
+                                         },
+                      "delay":  0.05
+                  },
+                  {
+                      "brickId":  "InventoryOrangeLegoBrick_242",
+                      "targetPosition":  {
+                                             "x":  14.4,
+                                             "y":  0.48,
+                                             "z":  0
+                                         },
+                      "targetRotation":  {
+                                             "x":  0,
+                                             "y":  0,
+                                             "z":  0
+                                         },
+                      "delay":  0.05
+                  },
+                  {
+                      "brickId":  "InventoryOrangeLegoBrick_241",
+                      "targetPosition":  {
+                                             "x":  18.45,
+                                             "y":  0.48,
+                                             "z":  0
+                                         },
+                      "targetRotation":  {
+                                             "x":  0,
+                                             "y":  0,
+                                             "z":  0
+                                         },
+                      "delay":  0.05
+                  },
+                  {
+                      "brickId":  "InventoryOrangeLegoBrick_240",
+                      "targetPosition":  {
+                                             "x":  -18,
+                                             "y":  1.46,
+                                             "z":  0
+                                         },
+                      "targetRotation":  {
+                                             "x":  0,
+                                             "y":  0,
+                                             "z":  0
+                                         },
+                      "delay":  0.05
+                  },
+                  {
+                      "brickId":  "InventoryOrangeLegoBrick_239",
+                      "targetPosition":  {
+                                             "x":  -13.95,
+                                             "y":  1.46,
+                                             "z":  0
+                                         },
+                      "targetRotation":  {
+                                             "x":  0,
+                                             "y":  0,
+                                             "z":  0
+                                         },
+                      "delay":  0.05
+                  },
+                  {
+                      "brickId":  "InventoryOrangeLegoBrick_238",
+                      "targetPosition":  {
+                                             "x":  -9.9,
+                                             "y":  1.46,
+                                             "z":  0
+                                         },
+                      "targetRotation":  {
+                                             "x":  0,
+                                             "y":  0,
+                                             "z":  0
+                                         },
+                      "delay":  0.05
+                  },
+                  {
+                      "brickId":  "InventoryOrangeLegoBrick_237",
+                      "targetPosition":  {
+                                             "x":  -5.85,
+                                             "y":  1.46,
+                                             "z":  0
+                                         },
+                      "targetRotation":  {
+                                             "x":  0,
+                                             "y":  0,
+                                             "z":  0
+                                         },
+                      "delay":  0.05
+                  },
+                  {
+                      "brickId":  "InventoryOrangeLegoBrick_236",
+                      "targetPosition":  {
+                                             "x":  -1.8,
+                                             "y":  1.46,
+                                             "z":  0
+                                         },
+                      "targetRotation":  {
+                                             "x":  0,
+                                             "y":  0,
+                                             "z":  0
+                                         },
+                      "delay":  0.05
+                  },
+                  {
+                      "brickId":  "InventoryOrangeLegoBrick_235",
+                      "targetPosition":  {
+                                             "x":  2.25,
+                                             "y":  1.46,
+                                             "z":  0
+                                         },
+                      "targetRotation":  {
+                                             "x":  0,
+                                             "y":  0,
+                                             "z":  0
+                                         },
+                      "delay":  0.05
+                  },
+                  {
+                      "brickId":  "InventoryOrangeLegoBrick_234",
+                      "targetPosition":  {
+                                             "x":  6.3,
+                                             "y":  1.46,
+                                             "z":  0
+                                         },
+                      "targetRotation":  {
+                                             "x":  0,
+                                             "y":  0,
+                                             "z":  0
+                                         },
+                      "delay":  0.05
+                  },
+                  {
+                      "brickId":  "InventoryOrangeLegoBrick_233",
+                      "targetPosition":  {
+                                             "x":  10.35,
+                                             "y":  1.46,
+                                             "z":  0
+                                         },
+                      "targetRotation":  {
+                                             "x":  0,
+                                             "y":  0,
+                                             "z":  0
+                                         },
+                      "delay":  0.05
+                  },
+                  {
+                      "brickId":  "InventoryOrangeLegoBrick_232",
+                      "targetPosition":  {
+                                             "x":  14.4,
+                                             "y":  1.46,
+                                             "z":  0
+                                         },
+                      "targetRotation":  {
+                                             "x":  0,
+                                             "y":  0,
+                                             "z":  0
+                                         },
+                      "delay":  0.05
+                  },
+                  {
+                      "brickId":  "InventoryOrangeLegoBrick_231",
+                      "targetPosition":  {
+                                             "x":  18.45,
+                                             "y":  1.46,
+                                             "z":  0
+                                         },
+                      "targetRotation":  {
+                                             "x":  0,
+                                             "y":  0,
+                                             "z":  0
+                                         },
+                      "delay":  0.05
+                  },
+                  {
+                      "brickId":  "InventoryOrangeLegoBrick_230",
+                      "targetPosition":  {
+                                             "x":  -18,
+                                             "y":  2.44,
+                                             "z":  0
+                                         },
+                      "targetRotation":  {
+                                             "x":  0,
+                                             "y":  0,
+                                             "z":  0
+                                         },
+                      "delay":  0.05
+                  },
+                  {
+                      "brickId":  "InventoryOrangeLegoBrick_229",
+                      "targetPosition":  {
+                                             "x":  -13.95,
+                                             "y":  2.44,
+                                             "z":  0
+                                         },
+                      "targetRotation":  {
+                                             "x":  0,
+                                             "y":  0,
+                                             "z":  0
+                                         },
+                      "delay":  0.05
+                  },
+                  {
+                      "brickId":  "InventoryOrangeLegoBrick_228",
+                      "targetPosition":  {
+                                             "x":  -9.9,
+                                             "y":  2.44,
+                                             "z":  0
+                                         },
+                      "targetRotation":  {
+                                             "x":  0,
+                                             "y":  0,
+                                             "z":  0
+                                         },
+                      "delay":  0.05
+                  },
+                  {
+                      "brickId":  "InventoryOrangeLegoBrick_227",
+                      "targetPosition":  {
+                                             "x":  -5.85,
+                                             "y":  2.44,
+                                             "z":  0
+                                         },
+                      "targetRotation":  {
+                                             "x":  0,
+                                             "y":  0,
+                                             "z":  0
+                                         },
+                      "delay":  0.05
+                  },
+                  {
+                      "brickId":  "InventoryOrangeLegoBrick_226",
+                      "targetPosition":  {
+                                             "x":  -1.8,
+                                             "y":  2.44,
+                                             "z":  0
+                                         },
+                      "targetRotation":  {
+                                             "x":  0,
+                                             "y":  0,
+                                             "z":  0
+                                         },
+                      "delay":  0.05
+                  },
+                  {
+                      "brickId":  "InventoryOrangeLegoBrick_225",
+                      "targetPosition":  {
+                                             "x":  2.25,
+                                             "y":  2.44,
+                                             "z":  0
+                                         },
+                      "targetRotation":  {
+                                             "x":  0,
+                                             "y":  0,
+                                             "z":  0
+                                         },
+                      "delay":  0.05
+                  },
+                  {
+                      "brickId":  "InventoryOrangeLegoBrick_224",
+                      "targetPosition":  {
+                                             "x":  6.3,
+                                             "y":  2.44,
+                                             "z":  0
+                                         },
+                      "targetRotation":  {
+                                             "x":  0,
+                                             "y":  0,
+                                             "z":  0
+                                         },
+                      "delay":  0.05
+                  },
+                  {
+                      "brickId":  "InventoryOrangeLegoBrick_223",
+                      "targetPosition":  {
+                                             "x":  10.35,
+                                             "y":  2.44,
+                                             "z":  0
+                                         },
+                      "targetRotation":  {
+                                             "x":  0,
+                                             "y":  0,
+                                             "z":  0
+                                         },
+                      "delay":  0.05
+                  },
+                  {
+                      "brickId":  "InventoryOrangeLegoBrick_222",
+                      "targetPosition":  {
+                                             "x":  14.4,
+                                             "y":  2.44,
+                                             "z":  0
+                                         },
+                      "targetRotation":  {
+                                             "x":  0,
+                                             "y":  0,
+                                             "z":  0
+                                         },
+                      "delay":  0.05
+                  },
+                  {
+                      "brickId":  "InventoryOrangeLegoBrick_221",
+                      "targetPosition":  {
+                                             "x":  18.45,
+                                             "y":  2.44,
+                                             "z":  0
+                                         },
+                      "targetRotation":  {
+                                             "x":  0,
+                                             "y":  0,
+                                             "z":  0
+                                         },
+                      "delay":  0.05
+                  },
+                  {
+                      "brickId":  "InventoryOrangeLegoBrick_220",
+                      "targetPosition":  {
+                                             "x":  -18,
+                                             "y":  3.42,
+                                             "z":  0
+                                         },
+                      "targetRotation":  {
+                                             "x":  0,
+                                             "y":  0,
+                                             "z":  0
+                                         },
+                      "delay":  0.05
+                  },
+                  {
+                      "brickId":  "InventoryOrangeLegoBrick_219",
+                      "targetPosition":  {
+                                             "x":  -13.95,
+                                             "y":  3.42,
+                                             "z":  0
+                                         },
+                      "targetRotation":  {
+                                             "x":  0,
+                                             "y":  0,
+                                             "z":  0
+                                         },
+                      "delay":  0.05
+                  },
+                  {
+                      "brickId":  "InventoryOrangeLegoBrick_218",
+                      "targetPosition":  {
+                                             "x":  -9.9,
+                                             "y":  3.42,
+                                             "z":  0
+                                         },
+                      "targetRotation":  {
+                                             "x":  0,
+                                             "y":  0,
+                                             "z":  0
+                                         },
+                      "delay":  0.05
+                  },
+                  {
+                      "brickId":  "InventoryOrangeLegoBrick_217",
+                      "targetPosition":  {
+                                             "x":  -5.85,
+                                             "y":  3.42,
+                                             "z":  0
+                                         },
+                      "targetRotation":  {
+                                             "x":  0,
+                                             "y":  0,
+                                             "z":  0
+                                         },
+                      "delay":  0.05
+                  },
+                  {
+                      "brickId":  "InventoryOrangeLegoBrick_216",
+                      "targetPosition":  {
+                                             "x":  -1.8,
+                                             "y":  3.42,
+                                             "z":  0
+                                         },
+                      "targetRotation":  {
+                                             "x":  0,
+                                             "y":  0,
+                                             "z":  0
+                                         },
+                      "delay":  0.05
+                  },
+                  {
+                      "brickId":  "InventoryOrangeLegoBrick_215",
+                      "targetPosition":  {
+                                             "x":  2.25,
+                                             "y":  3.42,
+                                             "z":  0
+                                         },
+                      "targetRotation":  {
+                                             "x":  0,
+                                             "y":  0,
+                                             "z":  0
+                                         },
+                      "delay":  0.05
+                  },
+                  {
+                      "brickId":  "InventoryOrangeLegoBrick_214",
+                      "targetPosition":  {
+                                             "x":  6.3,
+                                             "y":  3.42,
+                                             "z":  0
+                                         },
+                      "targetRotation":  {
+                                             "x":  0,
+                                             "y":  0,
+                                             "z":  0
+                                         },
+                      "delay":  0.05
+                  },
+                  {
+                      "brickId":  "InventoryOrangeLegoBrick_213",
+                      "targetPosition":  {
+                                             "x":  10.35,
+                                             "y":  3.42,
+                                             "z":  0
+                                         },
+                      "targetRotation":  {
+                                             "x":  0,
+                                             "y":  0,
+                                             "z":  0
+                                         },
+                      "delay":  0.05
+                  },
+                  {
+                      "brickId":  "InventoryOrangeLegoBrick_212",
+                      "targetPosition":  {
+                                             "x":  14.4,
+                                             "y":  3.42,
+                                             "z":  0
+                                         },
+                      "targetRotation":  {
+                                             "x":  0,
+                                             "y":  0,
+                                             "z":  0
+                                         },
+                      "delay":  0.05
+                  },
+                  {
+                      "brickId":  "InventoryOrangeLegoBrick_211",
+                      "targetPosition":  {
+                                             "x":  18.45,
+                                             "y":  3.42,
+                                             "z":  0
+                                         },
+                      "targetRotation":  {
+                                             "x":  0,
+                                             "y":  0,
+                                             "z":  0
+                                         },
+                      "delay":  0.05
+                  },
+                  {
+                      "brickId":  "InventoryOrangeLegoBrick_210",
+                      "targetPosition":  {
+                                             "x":  -18,
+                                             "y":  4.4,
+                                             "z":  0
+                                         },
+                      "targetRotation":  {
+                                             "x":  0,
+                                             "y":  0,
+                                             "z":  0
+                                         },
+                      "delay":  0.05
+                  },
+                  {
+                      "brickId":  "InventoryOrangeLegoBrick_209",
+                      "targetPosition":  {
+                                             "x":  -13.95,
+                                             "y":  4.4,
+                                             "z":  0
+                                         },
+                      "targetRotation":  {
+                                             "x":  0,
+                                             "y":  0,
+                                             "z":  0
+                                         },
+                      "delay":  0.05
+                  },
+                  {
+                      "brickId":  "InventoryOrangeLegoBrick_208",
+                      "targetPosition":  {
+                                             "x":  -9.9,
+                                             "y":  4.4,
+                                             "z":  0
+                                         },
+                      "targetRotation":  {
+                                             "x":  0,
+                                             "y":  0,
+                                             "z":  0
+                                         },
+                      "delay":  0.05
+                  },
+                  {
+                      "brickId":  "InventoryOrangeLegoBrick_207",
+                      "targetPosition":  {
+                                             "x":  -5.85,
+                                             "y":  4.4,
+                                             "z":  0
+                                         },
+                      "targetRotation":  {
+                                             "x":  0,
+                                             "y":  0,
+                                             "z":  0
+                                         },
+                      "delay":  0.05
+                  },
+                  {
+                      "brickId":  "InventoryOrangeLegoBrick_206",
+                      "targetPosition":  {
+                                             "x":  -1.8,
+                                             "y":  4.4,
+                                             "z":  0
+                                         },
+                      "targetRotation":  {
+                                             "x":  0,
+                                             "y":  0,
+                                             "z":  0
+                                         },
+                      "delay":  0.05
+                  },
+                  {
+                      "brickId":  "InventoryOrangeLegoBrick_205",
+                      "targetPosition":  {
+                                             "x":  2.25,
+                                             "y":  4.4,
+                                             "z":  0
+                                         },
+                      "targetRotation":  {
+                                             "x":  0,
+                                             "y":  0,
+                                             "z":  0
+                                         },
+                      "delay":  0.05
+                  },
+                  {
+                      "brickId":  "InventoryOrangeLegoBrick_204",
+                      "targetPosition":  {
+                                             "x":  6.3,
+                                             "y":  4.4,
+                                             "z":  0
+                                         },
+                      "targetRotation":  {
+                                             "x":  0,
+                                             "y":  0,
+                                             "z":  0
+                                         },
+                      "delay":  0.05
+                  },
+                  {
+                      "brickId":  "InventoryOrangeLegoBrick_203",
+                      "targetPosition":  {
+                                             "x":  10.35,
+                                             "y":  4.4,
+                                             "z":  0
+                                         },
+                      "targetRotation":  {
+                                             "x":  0,
+                                             "y":  0,
+                                             "z":  0
+                                         },
+                      "delay":  0.05
+                  },
+                  {
+                      "brickId":  "InventoryOrangeLegoBrick_202",
+                      "targetPosition":  {
+                                             "x":  14.4,
+                                             "y":  4.4,
+                                             "z":  0
+                                         },
+                      "targetRotation":  {
+                                             "x":  0,
+                                             "y":  0,
+                                             "z":  0
+                                         },
+                      "delay":  0.05
+                  },
+                  {
+                      "brickId":  "InventoryOrangeLegoBrick_201",
+                      "targetPosition":  {
+                                             "x":  18.45,
+                                             "y":  4.4,
+                                             "z":  0
+                                         },
+                      "targetRotation":  {
+                                             "x":  0,
+                                             "y":  0,
+                                             "z":  0
+                                         },
+                      "delay":  0.05
+                  },
+                  {
+                      "brickId":  "InventoryOrangeLegoBrick_200",
+                      "targetPosition":  {
+                                             "x":  -18,
+                                             "y":  5.38,
+                                             "z":  0
+                                         },
+                      "targetRotation":  {
+                                             "x":  0,
+                                             "y":  0,
+                                             "z":  0
+                                         },
+                      "delay":  0.05
+                  },
+                  {
+                      "brickId":  "InventoryOrangeLegoBrick_199",
+                      "targetPosition":  {
+                                             "x":  -13.95,
+                                             "y":  5.38,
+                                             "z":  0
+                                         },
+                      "targetRotation":  {
+                                             "x":  0,
+                                             "y":  0,
+                                             "z":  0
+                                         },
+                      "delay":  0.05
+                  },
+                  {
+                      "brickId":  "InventoryOrangeLegoBrick_198",
+                      "targetPosition":  {
+                                             "x":  -9.9,
+                                             "y":  5.38,
+                                             "z":  0
+                                         },
+                      "targetRotation":  {
+                                             "x":  0,
+                                             "y":  0,
+                                             "z":  0
+                                         },
+                      "delay":  0.05
+                  },
+                  {
+                      "brickId":  "InventoryOrangeLegoBrick_197",
+                      "targetPosition":  {
+                                             "x":  -5.85,
+                                             "y":  5.38,
+                                             "z":  0
+                                         },
+                      "targetRotation":  {
+                                             "x":  0,
+                                             "y":  0,
+                                             "z":  0
+                                         },
+                      "delay":  0.05
+                  },
+                  {
+                      "brickId":  "InventoryOrangeLegoBrick_196",
+                      "targetPosition":  {
+                                             "x":  -1.8,
+                                             "y":  5.38,
+                                             "z":  0
+                                         },
+                      "targetRotation":  {
+                                             "x":  0,
+                                             "y":  0,
+                                             "z":  0
+                                         },
+                      "delay":  0.05
+                  },
+                  {
+                      "brickId":  "InventoryOrangeLegoBrick_195",
+                      "targetPosition":  {
+                                             "x":  2.25,
+                                             "y":  5.38,
+                                             "z":  0
+                                         },
+                      "targetRotation":  {
+                                             "x":  0,
+                                             "y":  0,
+                                             "z":  0
+                                         },
+                      "delay":  0.05
+                  },
+                  {
+                      "brickId":  "InventoryOrangeLegoBrick_194",
+                      "targetPosition":  {
+                                             "x":  6.3,
+                                             "y":  5.38,
+                                             "z":  0
+                                         },
+                      "targetRotation":  {
+                                             "x":  0,
+                                             "y":  0,
+                                             "z":  0
+                                         },
+                      "delay":  0.05
+                  },
+                  {
+                      "brickId":  "InventoryOrangeLegoBrick_193",
+                      "targetPosition":  {
+                                             "x":  10.35,
+                                             "y":  5.38,
+                                             "z":  0
+                                         },
+                      "targetRotation":  {
+                                             "x":  0,
+                                             "y":  0,
+                                             "z":  0
+                                         },
+                      "delay":  0.05
+                  },
+                  {
+                      "brickId":  "InventoryOrangeLegoBrick_192",
+                      "targetPosition":  {
+                                             "x":  14.4,
+                                             "y":  5.38,
+                                             "z":  0
+                                         },
+                      "targetRotation":  {
+                                             "x":  0,
+                                             "y":  0,
+                                             "z":  0
+                                         },
+                      "delay":  0.05
+                  },
+                  {
+                      "brickId":  "InventoryOrangeLegoBrick_191",
+                      "targetPosition":  {
+                                             "x":  18.45,
+                                             "y":  5.38,
+                                             "z":  0
+                                         },
+                      "targetRotation":  {
+                                             "x":  0,
+                                             "y":  0,
+                                             "z":  0
+                                         },
+                      "delay":  0.05
+                  },
+                  {
+                      "brickId":  "InventoryOrangeLegoBrick_190",
+                      "targetPosition":  {
+                                             "x":  -18,
+                                             "y":  6.36,
+                                             "z":  0
+                                         },
+                      "targetRotation":  {
+                                             "x":  0,
+                                             "y":  0,
+                                             "z":  0
+                                         },
+                      "delay":  0.05
+                  },
+                  {
+                      "brickId":  "InventoryOrangeLegoBrick_189",
+                      "targetPosition":  {
+                                             "x":  -13.95,
+                                             "y":  6.36,
+                                             "z":  0
+                                         },
+                      "targetRotation":  {
+                                             "x":  0,
+                                             "y":  0,
+                                             "z":  0
+                                         },
+                      "delay":  0.05
+                  },
+                  {
+                      "brickId":  "InventoryOrangeLegoBrick_188",
+                      "targetPosition":  {
+                                             "x":  -9.9,
+                                             "y":  6.36,
+                                             "z":  0
+                                         },
+                      "targetRotation":  {
+                                             "x":  0,
+                                             "y":  0,
+                                             "z":  0
+                                         },
+                      "delay":  0.05
+                  },
+                  {
+                      "brickId":  "InventoryOrangeLegoBrick_187",
+                      "targetPosition":  {
+                                             "x":  -5.85,
+                                             "y":  6.36,
+                                             "z":  0
+                                         },
+                      "targetRotation":  {
+                                             "x":  0,
+                                             "y":  0,
+                                             "z":  0
+                                         },
+                      "delay":  0.05
+                  },
+                  {
+                      "brickId":  "InventoryOrangeLegoBrick_186",
+                      "targetPosition":  {
+                                             "x":  -1.8,
+                                             "y":  6.36,
+                                             "z":  0
+                                         },
+                      "targetRotation":  {
+                                             "x":  0,
+                                             "y":  0,
+                                             "z":  0
+                                         },
+                      "delay":  0.05
+                  },
+                  {
+                      "brickId":  "InventoryOrangeLegoBrick_185",
+                      "targetPosition":  {
+                                             "x":  2.25,
+                                             "y":  6.36,
+                                             "z":  0
+                                         },
+                      "targetRotation":  {
+                                             "x":  0,
+                                             "y":  0,
+                                             "z":  0
+                                         },
+                      "delay":  0.05
+                  },
+                  {
+                      "brickId":  "InventoryOrangeLegoBrick_184",
+                      "targetPosition":  {
+                                             "x":  6.3,
+                                             "y":  6.36,
+                                             "z":  0
+                                         },
+                      "targetRotation":  {
+                                             "x":  0,
+                                             "y":  0,
+                                             "z":  0
+                                         },
+                      "delay":  0.05
+                  },
+                  {
+                      "brickId":  "InventoryOrangeLegoBrick_183",
+                      "targetPosition":  {
+                                             "x":  10.35,
+                                             "y":  6.36,
+                                             "z":  0
+                                         },
+                      "targetRotation":  {
+                                             "x":  0,
+                                             "y":  0,
+                                             "z":  0
+                                         },
+                      "delay":  0.05
+                  },
+                  {
+                      "brickId":  "InventoryOrangeLegoBrick_182",
+                      "targetPosition":  {
+                                             "x":  14.4,
+                                             "y":  6.36,
+                                             "z":  0
+                                         },
+                      "targetRotation":  {
+                                             "x":  0,
+                                             "y":  0,
+                                             "z":  0
+                                         },
+                      "delay":  0.05
+                  },
+                  {
+                      "brickId":  "InventoryOrangeLegoBrick_181",
+                      "targetPosition":  {
+                                             "x":  18.45,
+                                             "y":  6.36,
+                                             "z":  0
+                                         },
+                      "targetRotation":  {
+                                             "x":  0,
+                                             "y":  0,
+                                             "z":  0
+                                         },
+                      "delay":  0.05
+                  },
+                  {
+                      "brickId":  "InventoryOrangeLegoBrick_180",
+                      "targetPosition":  {
+                                             "x":  -18,
+                                             "y":  7.34,
+                                             "z":  0
+                                         },
+                      "targetRotation":  {
+                                             "x":  0,
+                                             "y":  0,
+                                             "z":  0
+                                         },
+                      "delay":  0.05
+                  },
+                  {
+                      "brickId":  "InventoryOrangeLegoBrick_179",
+                      "targetPosition":  {
+                                             "x":  -13.95,
+                                             "y":  7.34,
+                                             "z":  0
+                                         },
+                      "targetRotation":  {
+                                             "x":  0,
+                                             "y":  0,
+                                             "z":  0
+                                         },
+                      "delay":  0.05
+                  },
+                  {
+                      "brickId":  "InventoryOrangeLegoBrick_178",
+                      "targetPosition":  {
+                                             "x":  -9.9,
+                                             "y":  7.34,
+                                             "z":  0
+                                         },
+                      "targetRotation":  {
+                                             "x":  0,
+                                             "y":  0,
+                                             "z":  0
+                                         },
+                      "delay":  0.05
+                  },
+                  {
+                      "brickId":  "InventoryOrangeLegoBrick_177",
+                      "targetPosition":  {
+                                             "x":  -5.85,
+                                             "y":  7.34,
+                                             "z":  0
+                                         },
+                      "targetRotation":  {
+                                             "x":  0,
+                                             "y":  0,
+                                             "z":  0
+                                         },
+                      "delay":  0.05
+                  },
+                  {
+                      "brickId":  "InventoryOrangeLegoBrick_176",
+                      "targetPosition":  {
+                                             "x":  -1.8,
+                                             "y":  7.34,
+                                             "z":  0
+                                         },
+                      "targetRotation":  {
+                                             "x":  0,
+                                             "y":  0,
+                                             "z":  0
+                                         },
+                      "delay":  0.05
+                  },
+                  {
+                      "brickId":  "InventoryOrangeLegoBrick_175",
+                      "targetPosition":  {
+                                             "x":  2.25,
+                                             "y":  7.34,
+                                             "z":  0
+                                         },
+                      "targetRotation":  {
+                                             "x":  0,
+                                             "y":  0,
+                                             "z":  0
+                                         },
+                      "delay":  0.05
+                  },
+                  {
+                      "brickId":  "InventoryOrangeLegoBrick_174",
+                      "targetPosition":  {
+                                             "x":  6.3,
+                                             "y":  7.34,
+                                             "z":  0
+                                         },
+                      "targetRotation":  {
+                                             "x":  0,
+                                             "y":  0,
+                                             "z":  0
+                                         },
+                      "delay":  0.05
+                  },
+                  {
+                      "brickId":  "InventoryOrangeLegoBrick_173",
+                      "targetPosition":  {
+                                             "x":  10.35,
+                                             "y":  7.34,
+                                             "z":  0
+                                         },
+                      "targetRotation":  {
+                                             "x":  0,
+                                             "y":  0,
+                                             "z":  0
+                                         },
+                      "delay":  0.05
+                  },
+                  {
+                      "brickId":  "InventoryOrangeLegoBrick_172",
+                      "targetPosition":  {
+                                             "x":  14.4,
+                                             "y":  7.34,
+                                             "z":  0
+                                         },
+                      "targetRotation":  {
+                                             "x":  0,
+                                             "y":  0,
+                                             "z":  0
+                                         },
+                      "delay":  0.05
+                  },
+                  {
+                      "brickId":  "InventoryOrangeLegoBrick_171",
+                      "targetPosition":  {
+                                             "x":  18.45,
+                                             "y":  7.34,
+                                             "z":  0
+                                         },
+                      "targetRotation":  {
+                                             "x":  0,
+                                             "y":  0,
+                                             "z":  0
+                                         },
+                      "delay":  0.05
+                  },
+                  {
+                      "brickId":  "InventoryOrangeLegoBrick_170",
+                      "targetPosition":  {
+                                             "x":  -18,
+                                             "y":  8.32,
+                                             "z":  0
+                                         },
+                      "targetRotation":  {
+                                             "x":  0,
+                                             "y":  0,
+                                             "z":  0
+                                         },
+                      "delay":  0.05
+                  },
+                  {
+                      "brickId":  "InventoryOrangeLegoBrick_169",
+                      "targetPosition":  {
+                                             "x":  -13.95,
+                                             "y":  8.32,
+                                             "z":  0
+                                         },
+                      "targetRotation":  {
+                                             "x":  0,
+                                             "y":  0,
+                                             "z":  0
+                                         },
+                      "delay":  0.05
+                  },
+                  {
+                      "brickId":  "InventoryOrangeLegoBrick_168",
+                      "targetPosition":  {
+                                             "x":  -9.9,
+                                             "y":  8.32,
+                                             "z":  0
+                                         },
+                      "targetRotation":  {
+                                             "x":  0,
+                                             "y":  0,
+                                             "z":  0
+                                         },
+                      "delay":  0.05
+                  },
+                  {
+                      "brickId":  "InventoryOrangeLegoBrick_167",
+                      "targetPosition":  {
+                                             "x":  -5.85,
+                                             "y":  8.32,
+                                             "z":  0
+                                         },
+                      "targetRotation":  {
+                                             "x":  0,
+                                             "y":  0,
+                                             "z":  0
+                                         },
+                      "delay":  0.05
+                  },
+                  {
+                      "brickId":  "InventoryOrangeLegoBrick_166",
+                      "targetPosition":  {
+                                             "x":  -1.8,
+                                             "y":  8.32,
+                                             "z":  0
+                                         },
+                      "targetRotation":  {
+                                             "x":  0,
+                                             "y":  0,
+                                             "z":  0
+                                         },
+                      "delay":  0.05
+                  },
+                  {
+                      "brickId":  "InventoryOrangeLegoBrick_165",
+                      "targetPosition":  {
+                                             "x":  2.25,
+                                             "y":  8.32,
+                                             "z":  0
+                                         },
+                      "targetRotation":  {
+                                             "x":  0,
+                                             "y":  0,
+                                             "z":  0
+                                         },
+                      "delay":  0.05
+                  },
+                  {
+                      "brickId":  "InventoryOrangeLegoBrick_164",
+                      "targetPosition":  {
+                                             "x":  6.3,
+                                             "y":  8.32,
+                                             "z":  0
+                                         },
+                      "targetRotation":  {
+                                             "x":  0,
+                                             "y":  0,
+                                             "z":  0
+                                         },
+                      "delay":  0.05
+                  },
+                  {
+                      "brickId":  "InventoryOrangeLegoBrick_163",
+                      "targetPosition":  {
+                                             "x":  10.35,
+                                             "y":  8.32,
+                                             "z":  0
+                                         },
+                      "targetRotation":  {
+                                             "x":  0,
+                                             "y":  0,
+                                             "z":  0
+                                         },
+                      "delay":  0.05
+                  },
+                  {
+                      "brickId":  "InventoryOrangeLegoBrick_162",
+                      "targetPosition":  {
+                                             "x":  14.4,
+                                             "y":  8.32,
+                                             "z":  0
+                                         },
+                      "targetRotation":  {
+                                             "x":  0,
+                                             "y":  0,
+                                             "z":  0
+                                         },
+                      "delay":  0.05
+                  },
+                  {
+                      "brickId":  "InventoryOrangeLegoBrick_161",
+                      "targetPosition":  {
+                                             "x":  18.45,
+                                             "y":  8.32,
+                                             "z":  0
+                                         },
+                      "targetRotation":  {
+                                             "x":  0,
+                                             "y":  0,
+                                             "z":  0
+                                         },
+                      "delay":  0.05
+                  },
+                  {
+                      "brickId":  "InventoryOrangeLegoBrick_160",
+                      "targetPosition":  {
+                                             "x":  -18,
+                                             "y":  9.3,
+                                             "z":  0
+                                         },
+                      "targetRotation":  {
+                                             "x":  0,
+                                             "y":  0,
+                                             "z":  0
+                                         },
+                      "delay":  0.05
+                  },
+                  {
+                      "brickId":  "InventoryOrangeLegoBrick_159",
+                      "targetPosition":  {
+                                             "x":  -13.95,
+                                             "y":  9.3,
+                                             "z":  0
+                                         },
+                      "targetRotation":  {
+                                             "x":  0,
+                                             "y":  0,
+                                             "z":  0
+                                         },
+                      "delay":  0.05
+                  },
+                  {
+                      "brickId":  "InventoryOrangeLegoBrick_158",
+                      "targetPosition":  {
+                                             "x":  -9.9,
+                                             "y":  9.3,
+                                             "z":  0
+                                         },
+                      "targetRotation":  {
+                                             "x":  0,
+                                             "y":  0,
+                                             "z":  0
+                                         },
+                      "delay":  0.05
+                  },
+                  {
+                      "brickId":  "InventoryOrangeLegoBrick_157",
+                      "targetPosition":  {
+                                             "x":  -5.85,
+                                             "y":  9.3,
+                                             "z":  0
+                                         },
+                      "targetRotation":  {
+                                             "x":  0,
+                                             "y":  0,
+                                             "z":  0
+                                         },
+                      "delay":  0.05
+                  },
+                  {
+                      "brickId":  "InventoryOrangeLegoBrick_156",
+                      "targetPosition":  {
+                                             "x":  -1.8,
+                                             "y":  9.3,
+                                             "z":  0
+                                         },
+                      "targetRotation":  {
+                                             "x":  0,
+                                             "y":  0,
+                                             "z":  0
+                                         },
+                      "delay":  0.05
+                  },
+                  {
+                      "brickId":  "InventoryOrangeLegoBrick_155",
+                      "targetPosition":  {
+                                             "x":  2.25,
+                                             "y":  9.3,
+                                             "z":  0
+                                         },
+                      "targetRotation":  {
+                                             "x":  0,
+                                             "y":  0,
+                                             "z":  0
+                                         },
+                      "delay":  0.05
+                  },
+                  {
+                      "brickId":  "InventoryOrangeLegoBrick_154",
+                      "targetPosition":  {
+                                             "x":  6.3,
+                                             "y":  9.3,
+                                             "z":  0
+                                         },
+                      "targetRotation":  {
+                                             "x":  0,
+                                             "y":  0,
+                                             "z":  0
+                                         },
+                      "delay":  0.05
+                  },
+                  {
+                      "brickId":  "InventoryOrangeLegoBrick_153",
+                      "targetPosition":  {
+                                             "x":  10.35,
+                                             "y":  9.3,
+                                             "z":  0
+                                         },
+                      "targetRotation":  {
+                                             "x":  0,
+                                             "y":  0,
+                                             "z":  0
+                                         },
+                      "delay":  0.05
+                  },
+                  {
+                      "brickId":  "InventoryOrangeLegoBrick_152",
+                      "targetPosition":  {
+                                             "x":  14.4,
+                                             "y":  9.3,
+                                             "z":  0
+                                         },
+                      "targetRotation":  {
+                                             "x":  0,
+                                             "y":  0,
+                                             "z":  0
+                                         },
+                      "delay":  0.05
+                  },
+                  {
+                      "brickId":  "InventoryOrangeLegoBrick_151",
+                      "targetPosition":  {
+                                             "x":  18.45,
+                                             "y":  9.3,
+                                             "z":  0
+                                         },
+                      "targetRotation":  {
+                                             "x":  0,
+                                             "y":  0,
+                                             "z":  0
+                                         },
+                      "delay":  0.05
+                  }
+              ]
+}

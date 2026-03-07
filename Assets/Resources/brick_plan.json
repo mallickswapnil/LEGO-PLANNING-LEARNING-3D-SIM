@@ -1,0 +1,154 @@
+{
+  "steps": [
+    {
+      "brickId": "InventoryBrick_250",
+      "targetPosition": { "x": 0.0, "y": 1.0, "z": 0.0 },
+      "targetRotation": { "x": 0.0, "y": 0.0, "z": 0.0 },
+      "delay": 0.2
+    },
+    {
+      "brickId": "InventoryBrick_249",
+      "targetPosition": { "x": 5.5, "y": 1.0, "z": 0.0 },
+      "targetRotation": { "x": 0.0, "y": 0.0, "z": 0.0 },
+      "delay": 0.2
+    },
+    {
+      "brickId": "InventoryBrick_248",
+      "targetPosition": { "x": 11.0, "y": 1.0, "z": 0.0 },
+      "targetRotation": { "x": 0.0, "y": 0.0, "z": 0.0 },
+      "delay": 0.2
+    },
+    {
+      "brickId": "InventoryBrick_247",
+      "targetPosition": { "x": 16.5, "y": 1.0, "z": 0.0 },
+      "targetRotation": { "x": 0.0, "y": 0.0, "z": 0.0 },
+      "delay": 0.2
+    },
+    {
+      "brickId": "InventoryBrick_246",
+      "targetPosition": { "x": 22.0, "y": 1.0, "z": 0.0 },
+      "targetRotation": { "x": 0.0, "y": 0.0, "z": 0.0 },
+      "delay": 0.2
+    },
+    {
+      "brickId": "InventoryBrick_245",
+      "targetPosition": { "x": 0.0, "y": 3.0, "z": 0.0 },
+      "targetRotation": { "x": 0.0, "y": 0.0, "z": 0.0 },
+      "delay": 0.2
+    },
+    {
+      "brickId": "InventoryBrick_244",
+      "targetPosition": { "x": 5.5, "y": 3.0, "z": 0.0 },
+      "targetRotation": { "x": 0.0, "y": 0.0, "z": 0.0 },
+      "delay": 0.2
+    },
+    {
+      "brickId": "InventoryBrick_243",
+      "targetPosition": { "x": 11.0, "y": 3.0, "z": 0.0 },
+      "targetRotation": { "x": 0.0, "y": 0.0, "z": 0.0 },
+      "delay": 0.2
+    },
+    {
+      "brickId": "InventoryBrick_242",
+      "targetPosition": { "x": 16.5, "y": 3.0, "z": 0.0 },
+      "targetRotation": { "x": 0.0, "y": 0.0, "z": 0.0 },
+      "delay": 0.2
+    },
+    {
+      "brickId": "InventoryBrick_241",
+      "targetPosition": { "x": 22.0, "y": 3.0, "z": 0.0 },
+      "targetRotation": { "x": 0.0, "y": 0.0, "z": 0.0 },
+      "delay": 0.2
+    },
+    {
+      "brickId": "InventoryBrick_240",
+      "targetPosition": { "x": 0.0, "y": 5.0, "z": 0.0 },
+      "targetRotation": { "x": 0.0, "y": 0.0, "z": 0.0 },
+      "delay": 0.2
+    },
+    {
+      "brickId": "InventoryBrick_239",
+      "targetPosition": { "x": 5.5, "y": 5.0, "z": 0.0 },
+      "targetRotation": { "x": 0.0, "y": 0.0, "z": 0.0 },
+      "delay": 0.2
+    },
+    {
+      "brickId": "InventoryBrick_238",
+      "targetPosition": { "x": 11.0, "y": 5.0, "z": 0.0 },
+      "targetRotation": { "x": 0.0, "y": 0.0, "z": 0.0 },
+      "delay": 0.2
+    },
+    {
+      "brickId": "InventoryBrick_237",
+      "targetPosition": { "x": 16.5, "y": 5.0, "z": 0.0 },
+      "targetRotation": { "x": 0.0, "y": 0.0, "z": 0.0 },
+      "delay": 0.2
+    },
+    {
+      "brickId": "InventoryBrick_236",
+      "targetPosition": { "x": 22.0, "y": 5.0, "z": 0.0 },
+      "targetRotation": { "x": 0.0, "y": 0.0, "z": 0.0 },
+      "delay": 0.2
+    },
+    {
+      "brickId": "InventoryBrick_235",
+      "targetPosition": { "x": 0.0, "y": 7.0, "z": 0.0 },
+      "targetRotation": { "x": 0.0, "y": 0.0, "z": 0.0 },
+      "delay": 0.2
+    },
+    {
+      "brickId": "InventoryBrick_234",
+      "targetPosition": { "x": 5.5, "y": 7.0, "z": 0.0 },
+      "targetRotation": { "x": 0.0, "y": 0.0, "z": 0.0 },
+      "delay": 0.2
+    },
+    {
+      "brickId": "InventoryBrick_233",
+      "targetPosition": { "x": 11.0, "y": 7.0, "z": 0.0 },
+      "targetRotation": { "x": 0.0, "y": 0.0, "z": 0.0 },
+      "delay": 0.2
+    },
+    {
+      "brickId": "InventoryBrick_232",
+      "targetPosition": { "x": 16.5, "y": 7.0, "z": 0.0 },
+      "targetRotation": { "x": 0.0, "y": 0.0, "z": 0.0 },
+      "delay": 0.2
+    },
+    {
+      "brickId": "InventoryBrick_231",
+      "targetPosition": { "x": 22.0, "y": 7.0, "z": 0.0 },
+      "targetRotation": { "x": 0.0, "y": 0.0, "z": 0.0 },
+      "delay": 0.2
+    },
+    {
+      "brickId": "InventoryBrick_230",
+      "targetPosition": { "x": 0.0, "y": 9.0, "z": 0.0 },
+      "targetRotation": { "x": 0.0, "y": 0.0, "z": 0.0 },
+      "delay": 0.2
+    },
+    {
+      "brickId": "InventoryBrick_229",
+      "targetPosition": { "x": 5.5, "y": 9.0, "z": 0.0 },
+      "targetRotation": { "x": 0.0, "y": 0.0, "z": 0.0 },
+      "delay": 0.2
+    },
+    {
+      "brickId": "InventoryBrick_228",
+      "targetPosition": { "x": 11.0, "y": 9.0, "z": 0.0 },
+      "targetRotation": { "x": 0.0, "y": 0.0, "z": 0.0 },
+      "delay": 0.2
+    },
+    {
+      "brickId": "InventoryBrick_227",
+      "targetPosition": { "x": 16.5, "y": 9.0, "z": 0.0 },
+      "targetRotation": { "x": 0.0, "y": 0.0, "z": 0.0 },
+      "delay": 0.2
+    },
+    {
+      "brickId": "InventoryBrick_226",
+      "targetPosition": { "x": 22.0, "y": 9.0, "z": 0.0 },
+      "targetRotation": { "x": 0.0, "y": 0.0, "z": 0.0 },
+      "delay": 0.2
+    }
+  ]
+}
