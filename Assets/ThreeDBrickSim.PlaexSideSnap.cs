@@ -5,19 +5,50 @@ using UnityEngine;
 public partial class ThreeDBrickSim
 {
     private const float PlaexSideConnectorFacingTolerance = 0.95f;
+    private const float PlaexLongCanonicalHalfLength = 2.5f;
+    private const float PlaexSideCanonicalHalfExtent = 1f;
+    private const PlaexSideHorizontalFace YellowSideCavityFace = PlaexSideHorizontalFace.PositiveZ;
+
+    private enum PlaexSideBrickKind
+    {
+        Unsupported = 0,
+        GreenLong = 1,
+        OrangeLong = 2,
+        YellowSide = 3
+    }
+
+    private enum PlaexSideConnectorKind
+    {
+        Tab = 0,
+        Cavity = 1
+    }
+
+    private enum PlaexSideHorizontalFace
+    {
+        PositiveX = 0,
+        NegativeX = 1,
+        PositiveZ = 2,
+        NegativeZ = 3
+    }
 
     private struct PlaexSidePhysicsSnapCandidate
     {
         public Rigidbody connectedRigidbody;
         public Vector3 offset;
         public Vector3 anchorWorldPosition;
+        public PlaexSideConnector movingConnector;
+        public PlaexSideConnector candidateConnector;
         public float score;
     }
 
     private struct PlaexSideConnector
     {
+        public Transform brickTransform;
         public Vector3 anchorWorldPosition;
         public Vector3 outwardNormal;
+        public PlaexSideConnectorKind kind;
+        public PlaexSideHorizontalFace face;
+        public float clearanceRadius;
     }
 
     private bool TrySnapPlaexSideBrickWithPhysics(Transform movingBrick)
@@ -38,11 +69,9 @@ public partial class ThreeDBrickSim
             return false;
         }
 
-        bool movingHasTabs = IsGreenPlaexSideTabBrick(movingBrick);
         if (!TryFindBestPlaexSideSnapCandidate(
             movingBrick,
             movingConnectors,
-            movingHasTabs,
             out PlaexSidePhysicsSnapCandidate candidate))
         {
             return false;
@@ -54,27 +83,19 @@ public partial class ThreeDBrickSim
     private bool TryFindBestPlaexSideSnapCandidate(
         Transform movingBrick,
         PlaexSideConnector[] movingConnectors,
-        bool movingHasTabs,
         out PlaexSidePhysicsSnapCandidate bestCandidate)
     {
         bestCandidate = default;
         bool found = false;
-        float maxConnectorGap = Mathf.Max(0.001f, plaexSidePhysicsSnapMaxConnectorGap);
-        float nominalCenterSpacing = Mathf.Max(0.01f, plaexSidePhysicsSnapNominalCenterSpacing);
-        float centerSpacingTolerance = Mathf.Max(0.001f, plaexSidePhysicsSnapCenterSpacingTolerance);
+        float bestScore = float.PositiveInfinity;
 
         foreach (Transform candidateBrick in plannedWallBricks)
         {
             if (candidateBrick == null ||
                 candidateBrick == movingBrick ||
                 detachedWallBricks.Contains(candidateBrick) ||
-                !IsPlaexSideSnapBrick(candidateBrick))
-            {
-                continue;
-            }
-
-            bool candidateHasTabs = IsGreenPlaexSideTabBrick(candidateBrick);
-            if (candidateHasTabs == movingHasTabs)
+                !IsPlaexSideSnapBrick(candidateBrick) ||
+                !CanPlaexSideBrickTypesPotentiallyConnect(movingBrick, candidateBrick))
             {
                 continue;
             }
@@ -90,103 +111,163 @@ public partial class ThreeDBrickSim
                 continue;
             }
 
-            if (!ArePlaexSideBricksOrientationCompatible(
+            if (!TryFindBestPlaexSideConnectionToCandidate(
                 movingBrick,
-                candidateBrick,
                 movingConnectors,
-                candidateConnectors))
+                candidateBrick,
+                candidateConnectors,
+                enforceOccupancyAndClearance: true,
+                out Vector3 offset,
+                out PlaexSideConnector movingConnector,
+                out PlaexSideConnector candidateConnector,
+                out float score))
             {
                 continue;
             }
 
-            for (int movingIndex = 0; movingIndex < movingConnectors.Length; movingIndex++)
+            Vector3 snappedPosition = movingBrick.position + offset;
+            if (rejectOverlappingPlacement &&
+                IsPlacementPoseBlocked(
+                    movingBrick,
+                    snappedPosition,
+                    movingBrick.rotation,
+                    allowedSideInterlockBrick: candidateBrick,
+                    requireExistingJointForAllowedInterlock: false))
             {
-                PlaexSideConnector movingConnector = movingConnectors[movingIndex];
-                if (!TryBuildWorldHorizontalSnapFrame(
+                continue;
+            }
+
+            if (found && score >= bestScore)
+            {
+                continue;
+            }
+
+            found = true;
+            bestScore = score;
+            bestCandidate = new PlaexSidePhysicsSnapCandidate
+            {
+                connectedRigidbody = candidateRigidbody,
+                offset = offset,
+                anchorWorldPosition = candidateConnector.anchorWorldPosition,
+                movingConnector = movingConnector,
+                candidateConnector = candidateConnector,
+                score = score
+            };
+        }
+
+        if (!found && logPlacementDebug)
+        {
+            Debug.Log($"PLAEX side snap: no candidate found for moving='{movingBrick.name}'.");
+        }
+
+        return found;
+    }
+
+    private bool TryFindBestPlaexSideConnectionToCandidate(
+        Transform movingBrick,
+        PlaexSideConnector[] movingConnectors,
+        Transform candidateBrick,
+        PlaexSideConnector[] candidateConnectors,
+        bool enforceOccupancyAndClearance,
+        out Vector3 bestOffset,
+        out PlaexSideConnector bestMovingConnector,
+        out PlaexSideConnector bestCandidateConnector,
+        out float bestScore)
+    {
+        bestOffset = Vector3.zero;
+        bestMovingConnector = default;
+        bestCandidateConnector = default;
+        bestScore = float.PositiveInfinity;
+
+        if (movingBrick == null ||
+            candidateBrick == null ||
+            movingConnectors == null ||
+            candidateConnectors == null ||
+            movingConnectors.Length == 0 ||
+            candidateConnectors.Length == 0 ||
+            !ArePlaexSideBricksOrientationCompatible(movingBrick, candidateBrick))
+        {
+            return false;
+        }
+
+        float maxConnectorGap = Mathf.Max(0.001f, plaexSidePhysicsSnapMaxConnectorGap);
+        float maxLateralOffset = Mathf.Max(0.001f, plaexSidePhysicsSnapMaxLateralOffset);
+        float maxVerticalOffset = Mathf.Max(0.001f, plaexSidePhysicsSnapMaxVerticalOffset);
+        bool found = false;
+
+        for (int movingIndex = 0; movingIndex < movingConnectors.Length; movingIndex++)
+        {
+            PlaexSideConnector movingConnector = movingConnectors[movingIndex];
+            if (!TryBuildWorldHorizontalSnapFrame(
                     movingConnector.outwardNormal,
                     out Vector3 centerAxis,
                     out Vector3 lateralAxis))
+            {
+                continue;
+            }
+
+            if (enforceOccupancyAndClearance)
+            {
+                if (IsPlaexSideConnectorOccupied(movingBrick, movingConnector, candidateBrick) ||
+                    !HasPlaexSideConnectorLocalClearance(movingBrick, movingConnector, candidateBrick))
+                {
+                    continue;
+                }
+            }
+
+            for (int candidateIndex = 0; candidateIndex < candidateConnectors.Length; candidateIndex++)
+            {
+                PlaexSideConnector candidateConnector = candidateConnectors[candidateIndex];
+                if (!ArePlaexSideConnectorKindsCompatible(movingConnector.kind, candidateConnector.kind))
                 {
                     continue;
                 }
 
-                float centerVerticalOffset = Mathf.Abs(movingBrick.position.y - candidateBrick.position.y);
-                if (centerVerticalOffset > plaexSidePhysicsSnapMaxVerticalOffset)
+                float facingDot = Vector3.Dot(movingConnector.outwardNormal, candidateConnector.outwardNormal);
+                if (facingDot > -PlaexSideConnectorFacingTolerance)
                 {
                     continue;
                 }
 
-                for (int candidateIndex = 0; candidateIndex < candidateConnectors.Length; candidateIndex++)
+                if (enforceOccupancyAndClearance)
                 {
-                    PlaexSideConnector candidateConnector = candidateConnectors[candidateIndex];
-                    float facingDot = Vector3.Dot(movingConnector.outwardNormal, candidateConnector.outwardNormal);
-                    if (facingDot > -PlaexSideConnectorFacingTolerance)
+                    if (IsPlaexSideConnectorOccupied(candidateBrick, candidateConnector, movingBrick) ||
+                        !HasPlaexSideConnectorLocalClearance(candidateBrick, candidateConnector, movingBrick))
                     {
                         continue;
                     }
-
-                    Vector3 centerDelta = candidateBrick.position - movingBrick.position;
-                    float centerDistanceAlongAxis = Mathf.Abs(Vector3.Dot(centerDelta, centerAxis));
-                    float centerSpacingOffset = Mathf.Abs(centerDistanceAlongAxis - nominalCenterSpacing);
-                    if (centerSpacingOffset > centerSpacingTolerance)
-                    {
-                        continue;
-                    }
-
-                    Vector3 rawOffset = candidateConnector.anchorWorldPosition - movingConnector.anchorWorldPosition;
-                    float centerAxisOffset = Vector3.Dot(rawOffset, centerAxis);
-                    float rawConnectorGap = Mathf.Abs(centerAxisOffset);
-                    if (rawConnectorGap > maxConnectorGap)
-                    {
-                        continue;
-                    }
-
-                    float lateralAxisOffset = Vector3.Dot(rawOffset, lateralAxis);
-                    float rawLateralOffset = Mathf.Abs(lateralAxisOffset);
-                    if (rawLateralOffset > plaexSidePhysicsSnapMaxLateralOffset)
-                    {
-                        continue;
-                    }
-
-                    float verticalOffset = rawOffset.y;
-                    float rawVerticalOffset = Mathf.Abs(verticalOffset);
-                    if (rawVerticalOffset > plaexSidePhysicsSnapMaxVerticalOffset)
-                    {
-                        continue;
-                    }
-
-                    // Keep nominal center spacing fixed; only correct lateral and vertical drift.
-                    Vector3 offset =
-                        (lateralAxis * lateralAxisOffset) +
-                        (Vector3.up * verticalOffset);
-
-                    float scoreGap = rawConnectorGap;
-                    if (rejectOverlappingPlacement &&
-                        IsPlacementPoseBlocked(
-                            movingBrick,
-                            movingBrick.position + offset,
-                            movingBrick.rotation,
-                            candidateBrick,
-                            requireExistingJointForAllowedInterlock: false))
-                    {
-                        continue;
-                    }
-
-                    float score = -(scoreGap + rawLateralOffset + (rawVerticalOffset * 2f));
-                    if (found && score <= bestCandidate.score)
-                    {
-                        continue;
-                    }
-
-                    found = true;
-                    bestCandidate = new PlaexSidePhysicsSnapCandidate
-                    {
-                        connectedRigidbody = candidateRigidbody,
-                        offset = offset,
-                        anchorWorldPosition = candidateConnector.anchorWorldPosition,
-                        score = score
-                    };
                 }
+
+                Vector3 rawOffset = candidateConnector.anchorWorldPosition - movingConnector.anchorWorldPosition;
+                float rawConnectorGap = Mathf.Abs(Vector3.Dot(rawOffset, centerAxis));
+                if (rawConnectorGap > maxConnectorGap)
+                {
+                    continue;
+                }
+
+                float rawLateralOffset = Mathf.Abs(Vector3.Dot(rawOffset, lateralAxis));
+                if (rawLateralOffset > maxLateralOffset)
+                {
+                    continue;
+                }
+
+                float rawVerticalOffset = Mathf.Abs(rawOffset.y);
+                if (rawVerticalOffset > maxVerticalOffset)
+                {
+                    continue;
+                }
+
+                float score = rawConnectorGap + rawLateralOffset + (rawVerticalOffset * 2f);
+                if (found && score >= bestScore)
+                {
+                    continue;
+                }
+
+                found = true;
+                bestScore = score;
+                bestOffset = rawOffset;
+                bestMovingConnector = movingConnector;
+                bestCandidateConnector = candidateConnector;
             }
         }
 
@@ -402,55 +483,66 @@ public partial class ThreeDBrickSim
     private bool TryBuildPlaexSideConnectors(Transform brickTransform, out PlaexSideConnector[] connectors)
     {
         connectors = null;
-        if (!TryGetPlaexLongBodyRenderer(brickTransform, out Renderer bodyRenderer))
+        if (brickTransform == null)
         {
             return false;
         }
 
-        Transform bodyTransform = bodyRenderer.transform;
-        Bounds localBounds = bodyRenderer.localBounds;
-        float halfLongExtent;
-        Vector3 localLongAxis;
-        if (localBounds.extents.x >= localBounds.extents.z)
-        {
-            halfLongExtent = localBounds.extents.x;
-            localLongAxis = Vector3.right;
-        }
-        else
-        {
-            halfLongExtent = localBounds.extents.z;
-            localLongAxis = Vector3.forward;
-        }
-
-        if (halfLongExtent <= 0.0001f)
+        PlaexSideBrickKind brickKind = ResolvePlaexSideBrickKind(brickTransform);
+        if (brickKind == PlaexSideBrickKind.Unsupported)
         {
             return false;
         }
 
-        Vector3 positiveLocal = localBounds.center + (localLongAxis * halfLongExtent);
-        Vector3 negativeLocal = localBounds.center - (localLongAxis * halfLongExtent);
-        Vector3 positiveNormal = bodyTransform.TransformDirection(localLongAxis).normalized;
-
-        connectors = new PlaexSideConnector[2];
-        connectors[0] = new PlaexSideConnector
+        switch (brickKind)
         {
-            anchorWorldPosition = bodyTransform.TransformPoint(positiveLocal),
-            outwardNormal = positiveNormal
-        };
-        connectors[1] = new PlaexSideConnector
-        {
-            anchorWorldPosition = bodyTransform.TransformPoint(negativeLocal),
-            outwardNormal = -positiveNormal
-        };
+            case PlaexSideBrickKind.YellowSide:
+                connectors = new[]
+                {
+                    BuildPlaexSideConnector(brickTransform, Vector3.right * PlaexSideCanonicalHalfExtent, Vector3.right, PlaexSideHorizontalFace.PositiveX, ResolveYellowSideConnectorKind(PlaexSideHorizontalFace.PositiveX)),
+                    BuildPlaexSideConnector(brickTransform, Vector3.left * PlaexSideCanonicalHalfExtent, Vector3.left, PlaexSideHorizontalFace.NegativeX, ResolveYellowSideConnectorKind(PlaexSideHorizontalFace.NegativeX)),
+                    BuildPlaexSideConnector(brickTransform, Vector3.forward * PlaexSideCanonicalHalfExtent, Vector3.forward, PlaexSideHorizontalFace.PositiveZ, ResolveYellowSideConnectorKind(PlaexSideHorizontalFace.PositiveZ)),
+                    BuildPlaexSideConnector(brickTransform, Vector3.back * PlaexSideCanonicalHalfExtent, Vector3.back, PlaexSideHorizontalFace.NegativeZ, ResolveYellowSideConnectorKind(PlaexSideHorizontalFace.NegativeZ))
+                };
+                return true;
 
-        return true;
+            case PlaexSideBrickKind.GreenLong:
+            case PlaexSideBrickKind.OrangeLong:
+                PlaexSideConnectorKind connectorKind = brickKind == PlaexSideBrickKind.GreenLong
+                    ? PlaexSideConnectorKind.Tab
+                    : PlaexSideConnectorKind.Cavity;
+
+                connectors = new[]
+                {
+                    BuildPlaexSideConnector(brickTransform, Vector3.right * PlaexLongCanonicalHalfLength, Vector3.right, PlaexSideHorizontalFace.PositiveX, connectorKind),
+                    BuildPlaexSideConnector(brickTransform, Vector3.left * PlaexLongCanonicalHalfLength, Vector3.left, PlaexSideHorizontalFace.NegativeX, connectorKind)
+                };
+                return true;
+
+            default:
+                return false;
+        }
     }
 
-    private bool ArePlaexSideBricksOrientationCompatible(
-        Transform first,
-        Transform second,
-        PlaexSideConnector[] firstConnectors,
-        PlaexSideConnector[] secondConnectors)
+    private PlaexSideConnector BuildPlaexSideConnector(
+        Transform brickTransform,
+        Vector3 localAnchor,
+        Vector3 localNormal,
+        PlaexSideHorizontalFace face,
+        PlaexSideConnectorKind kind)
+    {
+        return new PlaexSideConnector
+        {
+            brickTransform = brickTransform,
+            anchorWorldPosition = brickTransform.TransformPoint(localAnchor),
+            outwardNormal = brickTransform.TransformDirection(localNormal).normalized,
+            kind = kind,
+            face = face,
+            clearanceRadius = Mathf.Max(0.05f, plaexSideConnectorLocalClearanceRadius)
+        };
+    }
+
+    private bool ArePlaexSideBricksOrientationCompatible(Transform first, Transform second)
     {
         if (first == null || second == null)
         {
@@ -459,25 +551,364 @@ public partial class ThreeDBrickSim
 
         float toleranceDegrees = Mathf.Max(0f, plaexSidePhysicsSnapRotationToleranceDegrees);
         float cosineTolerance = Mathf.Cos(toleranceDegrees * Mathf.Deg2Rad);
-
         float upDot = Vector3.Dot(first.up.normalized, second.up.normalized);
-        if (upDot < cosineTolerance)
+        return upDot >= cosineTolerance;
+    }
+
+    private bool IsPlaexSideConnectorOccupied(
+        Transform brickTransform,
+        PlaexSideConnector connector,
+        Transform ignoredConnectedBrick = null)
+    {
+        if (brickTransform == null)
         {
             return false;
         }
 
-        if (firstConnectors == null ||
-            secondConnectors == null ||
-            firstConnectors.Length == 0 ||
-            secondConnectors.Length == 0)
+        FixedJoint[] joints = brickTransform.GetComponents<FixedJoint>();
+        for (int i = 0; i < joints.Length; i++)
+        {
+            FixedJoint joint = joints[i];
+            if (joint == null || joint.connectedBody == null)
+            {
+                continue;
+            }
+
+            Transform connectedBrick = joint.connectedBody.transform;
+            if (connectedBrick == null ||
+                connectedBrick == ignoredConnectedBrick ||
+                !IsPlaexSideSnapBrick(connectedBrick))
+            {
+                continue;
+            }
+
+            if (!TryGetCurrentPlaexSideConnectionPair(brickTransform, connectedBrick, out PlaexSideConnector ownConnector, out _))
+            {
+                continue;
+            }
+
+            if (ownConnector.face == connector.face)
+            {
+                return true;
+            }
+        }
+
+        return false;
+    }
+
+    private bool HasPlaexSideConnectorLocalClearance(
+        Transform brickTransform,
+        PlaexSideConnector selectedConnector,
+        Transform ignoredConnectedBrick = null)
+    {
+        if (brickTransform == null)
         {
             return false;
         }
 
-        float longAxisDot = Mathf.Abs(Vector3.Dot(
-            firstConnectors[0].outwardNormal.normalized,
-            secondConnectors[0].outwardNormal.normalized));
-        return longAxisDot >= cosineTolerance;
+        FixedJoint[] joints = brickTransform.GetComponents<FixedJoint>();
+        for (int i = 0; i < joints.Length; i++)
+        {
+            FixedJoint joint = joints[i];
+            if (joint == null || joint.connectedBody == null)
+            {
+                continue;
+            }
+
+            Transform connectedBrick = joint.connectedBody.transform;
+            if (connectedBrick == null ||
+                connectedBrick == ignoredConnectedBrick ||
+                !IsPlaexSideSnapBrick(connectedBrick))
+            {
+                continue;
+            }
+
+            if (!TryGetCurrentPlaexSideConnectionPair(brickTransform, connectedBrick, out PlaexSideConnector occupiedConnector, out _))
+            {
+                continue;
+            }
+
+            float minimumSeparation = occupiedConnector.clearanceRadius + selectedConnector.clearanceRadius;
+            float anchorDistance = Vector3.Distance(occupiedConnector.anchorWorldPosition, selectedConnector.anchorWorldPosition);
+            if (anchorDistance + 0.0001f < minimumSeparation)
+            {
+                return false;
+            }
+        }
+
+        return true;
+    }
+
+    private bool TryGetCurrentPlaexSideConnectionPair(
+        Transform firstBrick,
+        Transform secondBrick,
+        out PlaexSideConnector firstConnector,
+        out PlaexSideConnector secondConnector)
+    {
+        firstConnector = default;
+        secondConnector = default;
+
+        if (firstBrick == null ||
+            secondBrick == null ||
+            !TryBuildPlaexSideConnectors(firstBrick, out PlaexSideConnector[] firstConnectors) ||
+            !TryBuildPlaexSideConnectors(secondBrick, out PlaexSideConnector[] secondConnectors))
+        {
+            return false;
+        }
+
+        return TryFindBestPlaexSideConnectionToCandidate(
+            firstBrick,
+            firstConnectors,
+            secondBrick,
+            secondConnectors,
+            enforceOccupancyAndClearance: false,
+            out _,
+            out firstConnector,
+            out secondConnector,
+            out _);
+    }
+
+    private bool TryGetExistingLongToYellowSideConnection(
+        Transform longBrick,
+        Transform yellowSideBrick,
+        bool requireExistingJoint,
+        out PlaexSideConnector longConnector,
+        out PlaexSideConnector yellowConnector)
+    {
+        longConnector = default;
+        yellowConnector = default;
+
+        if (longBrick == null ||
+            yellowSideBrick == null ||
+            ResolvePlaexSideBrickKind(yellowSideBrick) != PlaexSideBrickKind.YellowSide)
+        {
+            return false;
+        }
+
+        PlaexSideBrickKind longKind = ResolvePlaexSideBrickKind(longBrick);
+        if (longKind != PlaexSideBrickKind.GreenLong && longKind != PlaexSideBrickKind.OrangeLong)
+        {
+            return false;
+        }
+
+        if (requireExistingJoint && !HasFixedJointConnection(longBrick, yellowSideBrick))
+        {
+            return false;
+        }
+
+        if (!TryGetCurrentPlaexSideConnectionPair(longBrick, yellowSideBrick, out longConnector, out yellowConnector))
+        {
+            return false;
+        }
+
+        return true;
+    }
+
+    private bool IsAllowedPlaexDirectSideInterlockOverlap(
+        Transform movingBrick,
+        Transform otherBrick,
+        float penetrationDistance,
+        Transform allowedSideInterlockBrick,
+        bool requireExistingJointForAllowedInterlock)
+    {
+        if (movingBrick == null || otherBrick == null)
+        {
+            return false;
+        }
+
+        float maxAllowedOverlap = Mathf.Max(placementPenetrationEpsilon, plaexSidePhysicsSnapAllowedInterlockOverlap);
+        if (penetrationDistance > maxAllowedOverlap)
+        {
+            return false;
+        }
+
+        if (!TryGetCurrentPlaexSideConnectionPair(movingBrick, otherBrick, out _, out _))
+        {
+            return false;
+        }
+
+        if (allowedSideInterlockBrick != null &&
+            allowedSideInterlockBrick != movingBrick &&
+            allowedSideInterlockBrick != otherBrick)
+        {
+            // Candidate evaluation can legitimately brush multiple compatible
+            // side-interlock neighbors at once when a long brick bridges a span.
+            if (requireExistingJointForAllowedInterlock)
+            {
+                return false;
+            }
+        }
+
+        if (!requireExistingJointForAllowedInterlock)
+        {
+            return true;
+        }
+
+        return HasFixedJointConnection(movingBrick, otherBrick);
+    }
+
+    private bool IsAllowedPlaexPerpendicularLongCornerOverlap(
+        Transform movingBrick,
+        Transform otherBrick,
+        float penetrationDistance,
+        Transform allowedSideInterlockBrick,
+        bool requireExistingJointForAllowedInterlock)
+    {
+        if (movingBrick == null ||
+            otherBrick == null ||
+            movingBrick == otherBrick)
+        {
+            return false;
+        }
+
+        PlaexSideBrickKind movingKind = ResolvePlaexSideBrickKind(movingBrick);
+        PlaexSideBrickKind otherKind = ResolvePlaexSideBrickKind(otherBrick);
+        if ((movingKind != PlaexSideBrickKind.GreenLong && movingKind != PlaexSideBrickKind.OrangeLong) ||
+            (otherKind != PlaexSideBrickKind.GreenLong && otherKind != PlaexSideBrickKind.OrangeLong))
+        {
+            return false;
+        }
+
+        float maxAllowedOverlap = Mathf.Max(
+            placementPenetrationEpsilon,
+            Mathf.Min(plaexSidePhysicsSnapAllowedInterlockOverlap, plaexSidePerpendicularLongCornerAllowedOverlap));
+        if (penetrationDistance > maxAllowedOverlap)
+        {
+            return false;
+        }
+
+        float maxVerticalOffset = Mathf.Max(0.001f, plaexSidePhysicsSnapMaxVerticalOffset);
+        if (Mathf.Abs(movingBrick.position.y - otherBrick.position.y) > maxVerticalOffset)
+        {
+            return false;
+        }
+
+        if (!ArePerpendicularPlaexLongBricks(movingBrick, otherBrick))
+        {
+            return false;
+        }
+
+        Transform sharedYellowBrick = allowedSideInterlockBrick;
+        if (sharedYellowBrick == null || ResolvePlaexSideBrickKind(sharedYellowBrick) != PlaexSideBrickKind.YellowSide)
+        {
+            return false;
+        }
+
+        if (!TryGetExistingLongToYellowSideConnection(
+                movingBrick,
+                sharedYellowBrick,
+                requireExistingJoint: false,
+                out _,
+                out PlaexSideConnector movingYellowConnector) ||
+            !TryGetExistingLongToYellowSideConnection(
+                otherBrick,
+                sharedYellowBrick,
+                requireExistingJoint: true,
+                out _,
+                out PlaexSideConnector otherYellowConnector))
+        {
+            return false;
+        }
+
+        if (movingYellowConnector.face == otherYellowConnector.face)
+        {
+            return false;
+        }
+
+        if (!requireExistingJointForAllowedInterlock)
+        {
+            return true;
+        }
+
+        return HasFixedJointConnection(otherBrick, sharedYellowBrick);
+    }
+
+    private bool ArePerpendicularPlaexLongBricks(Transform firstBrick, Transform secondBrick)
+    {
+        if (!TryGetPlaexLongHorizontalAxis(firstBrick, out Vector3 firstAxis) ||
+            !TryGetPlaexLongHorizontalAxis(secondBrick, out Vector3 secondAxis))
+        {
+            return false;
+        }
+
+        float axisDot = Mathf.Abs(Vector3.Dot(firstAxis, secondAxis));
+        return axisDot <= 0.25f;
+    }
+
+    private bool TryGetPlaexLongHorizontalAxis(Transform brickTransform, out Vector3 axis)
+    {
+        axis = Vector3.zero;
+        if (!TryBuildPlaexSideConnectors(brickTransform, out PlaexSideConnector[] connectors) || connectors.Length < 2)
+        {
+            return false;
+        }
+
+        Vector3 anchorDelta = connectors[0].anchorWorldPosition - connectors[1].anchorWorldPosition;
+        axis = Vector3.ProjectOnPlane(anchorDelta, Vector3.up);
+        if (axis.sqrMagnitude <= 0.000001f)
+        {
+            axis = Vector3.zero;
+            return false;
+        }
+
+        axis.Normalize();
+        return true;
+    }
+
+    private static bool ArePlaexSideConnectorKindsCompatible(PlaexSideConnectorKind firstKind, PlaexSideConnectorKind secondKind)
+    {
+        return firstKind != secondKind;
+    }
+
+    private static PlaexSideConnectorKind ResolveYellowSideConnectorKind(PlaexSideHorizontalFace face)
+    {
+        return face == YellowSideCavityFace
+            ? PlaexSideConnectorKind.Cavity
+            : PlaexSideConnectorKind.Tab;
+    }
+
+    private static bool HasPlaexSideTabs(Transform brickTransform)
+    {
+        PlaexSideBrickKind brickKind = ResolvePlaexSideBrickKind(brickTransform);
+        return brickKind == PlaexSideBrickKind.GreenLong || brickKind == PlaexSideBrickKind.YellowSide;
+    }
+
+    private static bool HasPlaexSideCavities(Transform brickTransform)
+    {
+        PlaexSideBrickKind brickKind = ResolvePlaexSideBrickKind(brickTransform);
+        return brickKind == PlaexSideBrickKind.OrangeLong || brickKind == PlaexSideBrickKind.YellowSide;
+    }
+
+    private static bool CanPlaexSideBrickTypesPotentiallyConnect(Transform firstBrick, Transform secondBrick)
+    {
+        if (!IsPlaexSideSnapBrick(firstBrick) || !IsPlaexSideSnapBrick(secondBrick))
+        {
+            return false;
+        }
+
+        return
+            (HasPlaexSideTabs(firstBrick) && HasPlaexSideCavities(secondBrick)) ||
+            (HasPlaexSideCavities(firstBrick) && HasPlaexSideTabs(secondBrick));
+    }
+
+    private static PlaexSideBrickKind ResolvePlaexSideBrickKind(Transform brickTransform)
+    {
+        if (IsGreenPlaexSideTabBrick(brickTransform))
+        {
+            return PlaexSideBrickKind.GreenLong;
+        }
+
+        if (IsOrangePlaexSideCavityBrick(brickTransform))
+        {
+            return PlaexSideBrickKind.OrangeLong;
+        }
+
+        if (IsYellowPlaexSideCavityBrick(brickTransform))
+        {
+            return PlaexSideBrickKind.YellowSide;
+        }
+
+        return PlaexSideBrickKind.Unsupported;
     }
 
     private static bool TryGetPlaexLongBodyRenderer(Transform brickTransform, out Renderer bodyRenderer)

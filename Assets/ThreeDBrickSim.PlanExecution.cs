@@ -6,6 +6,9 @@ using UnityEngine.UI;
 
 public partial class ThreeDBrickSim
 {
+    private static string queuedPlanExecutionResourceName;
+    private static bool queuedPlanExecutionShouldRecordVideo;
+
     private IEnumerator ExecutePlanFromResources(string resourceName)
     {
         try
@@ -76,7 +79,7 @@ public partial class ThreeDBrickSim
         }
         finally
         {
-            // StopPlanExecutionVideoRecording();
+            StopPlanExecutionVideoRecording();
         }
     }
 
@@ -92,6 +95,7 @@ public partial class ThreeDBrickSim
         EnsureEventSystem();
         CreatePlanDropdownUi();
         SetDropdownValueSilently(0);
+        TryStartQueuedPlanExecution();
     }
 
     private void LoadAvailablePlanNames()
@@ -155,7 +159,7 @@ public partial class ThreeDBrickSim
         panelRect.anchorMax = new Vector2(0f, 1f);
         panelRect.pivot = new Vector2(0f, 1f);
         panelRect.anchoredPosition = new Vector2(planUiLeftMargin, -planUiTopMargin);
-        panelRect.sizeDelta = new Vector2(planUiWidth, 130f);
+        panelRect.sizeDelta = new Vector2(planUiWidth, 170f);
         Image panelImage = panelObject.GetComponent<Image>();
         if (panelImage != null)
         {
@@ -233,6 +237,38 @@ public partial class ThreeDBrickSim
         buttonColors.fadeDuration = 0.08f;
         refreshButton.colors = buttonColors;
         refreshButton.onClick.AddListener(OnRefreshButtonClicked);
+
+        GameObject exportButtonObject = DefaultControls.CreateButton(resources);
+        exportButtonObject.name = "ExportVideoButton";
+        exportButtonObject.transform.SetParent(panelObject.transform, false);
+
+        RectTransform exportButtonRect = exportButtonObject.GetComponent<RectTransform>();
+        exportButtonRect.anchorMin = new Vector2(0f, 1f);
+        exportButtonRect.anchorMax = new Vector2(1f, 1f);
+        exportButtonRect.pivot = new Vector2(0.5f, 1f);
+        exportButtonRect.offsetMin = new Vector2(12f, -146f);
+        exportButtonRect.offsetMax = new Vector2(-12f, -146f + planUiButtonHeight);
+
+        Text exportButtonText = exportButtonObject.GetComponentInChildren<Text>();
+        if (exportButtonText != null)
+        {
+            exportButtonText.text = "Export Video";
+            exportButtonText.color = Color.white;
+            exportButtonText.fontSize = 15;
+            exportButtonText.fontStyle = FontStyle.Bold;
+        }
+
+        Button exportButton = exportButtonObject.GetComponent<Button>();
+        ColorBlock exportColors = exportButton.colors;
+        exportColors.normalColor = new Color32(46, 134, 92, 255);
+        exportColors.highlightedColor = new Color32(62, 168, 116, 255);
+        exportColors.pressedColor = new Color32(34, 99, 68, 255);
+        exportColors.selectedColor = new Color32(62, 168, 116, 255);
+        exportColors.disabledColor = new Color32(70, 70, 70, 140);
+        exportColors.colorMultiplier = 1f;
+        exportColors.fadeDuration = 0.08f;
+        exportButton.colors = exportColors;
+        exportButton.onClick.AddListener(OnExportVideoButtonClicked);
     }
 
     private static void StylePlanDropdown(GameObject dropdownObject, Dropdown dropdown)
@@ -358,10 +394,10 @@ public partial class ThreeDBrickSim
             return;
         }
 
-        ExecutePlanByIndex(selectedIndex);
+        ExecutePlanByIndex(selectedIndex, false);
     }
 
-    private void ExecutePlanByIndex(int selectedIndex)
+    private void ExecutePlanByIndex(int selectedIndex, bool recordVideo)
     {
         int planIndex = selectedIndex - 1;
         if (planIndex < 0 || planIndex >= availablePlanNames.Count)
@@ -370,30 +406,28 @@ public partial class ThreeDBrickSim
         }
 
         string resourceName = availablePlanNames[planIndex];
-        selectedPlanName = resourceName;
-
-        if (activePlanCoroutine != null)
-        {
-            StopCoroutine(activePlanCoroutine);
-            activePlanCoroutine = null;
-        }
-
-        // StopPlanExecutionVideoRecording();
-        // StartPlanExecutionVideoRecording(resourceName);
-        activePlanCoroutine = StartCoroutine(ExecutePlanFromResources(resourceName));
+        ExecutePlan(resourceName, recordVideo);
     }
 
     private void OnRefreshButtonClicked()
     {
-        if (activePlanCoroutine != null)
+        queuedPlanExecutionResourceName = null;
+        queuedPlanExecutionShouldRecordVideo = false;
+        RestartSceneForPlanExecution();
+    }
+
+    private void OnExportVideoButtonClicked()
+    {
+        string resourceName = ResolveSelectedPlanForExecution();
+        if (string.IsNullOrWhiteSpace(resourceName))
         {
-            StopCoroutine(activePlanCoroutine);
-            activePlanCoroutine = null;
+            Debug.LogWarning("OnExportVideoButtonClicked: Select a plan before exporting a video.");
+            return;
         }
 
-        // StopPlanExecutionVideoRecording();
-        Scene activeScene = SceneManager.GetActiveScene();
-        SceneManager.LoadScene(activeScene.buildIndex);
+        queuedPlanExecutionResourceName = resourceName;
+        queuedPlanExecutionShouldRecordVideo = true;
+        RestartSceneForPlanExecution();
     }
 
     private string ResolvePlanName()
@@ -437,5 +471,75 @@ public partial class ThreeDBrickSim
         }
 
         return null;
+    }
+
+    private void ExecutePlan(string resourceName, bool recordVideo)
+    {
+        selectedPlanName = resourceName;
+
+        if (activePlanCoroutine != null)
+        {
+            StopCoroutine(activePlanCoroutine);
+            activePlanCoroutine = null;
+        }
+
+        StopPlanExecutionVideoRecording();
+        if (recordVideo)
+        {
+            StartPlanExecutionVideoRecording(resourceName);
+        }
+
+        activePlanCoroutine = StartCoroutine(ExecutePlanFromResources(resourceName));
+    }
+
+    private string ResolveSelectedPlanForExecution()
+    {
+        if (planDropdown != null && planDropdown.value > 0)
+        {
+            int planIndex = planDropdown.value - 1;
+            if (planIndex >= 0 && planIndex < availablePlanNames.Count)
+            {
+                return availablePlanNames[planIndex];
+            }
+        }
+
+        string resolvedPlanName = ResolvePlanName();
+        return availablePlanNames.Contains(resolvedPlanName) ? resolvedPlanName : null;
+    }
+
+    private void RestartSceneForPlanExecution()
+    {
+        if (activePlanCoroutine != null)
+        {
+            StopCoroutine(activePlanCoroutine);
+            activePlanCoroutine = null;
+        }
+
+        StopPlanExecutionVideoRecording();
+        Scene activeScene = SceneManager.GetActiveScene();
+        SceneManager.LoadScene(activeScene.buildIndex);
+    }
+
+    private void TryStartQueuedPlanExecution()
+    {
+        if (string.IsNullOrWhiteSpace(queuedPlanExecutionResourceName))
+        {
+            return;
+        }
+
+        string resourceName = queuedPlanExecutionResourceName;
+        bool recordVideo = queuedPlanExecutionShouldRecordVideo;
+        queuedPlanExecutionResourceName = null;
+        queuedPlanExecutionShouldRecordVideo = false;
+
+        int planIndex = availablePlanNames.IndexOf(resourceName);
+        if (planIndex < 0)
+        {
+            Debug.LogWarning($"TryStartQueuedPlanExecution: Could not find queued plan '{resourceName}'.");
+            return;
+        }
+
+        SetDropdownValueSilently(planIndex + 1);
+        ExecutePlan(resourceName, recordVideo);
     }
 }

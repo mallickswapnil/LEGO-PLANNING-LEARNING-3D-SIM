@@ -348,6 +348,7 @@ MonoBehaviour:
   plaexLongPhysicsSnapRotationToleranceDegrees: 5
   requirePlaexLongVerticalSnapWhenLowerBrickExists: 1
   plaexLongVerticalSupportMinHeightDelta: 0.05
+  plaexLongVerticalAllowedInterlockOverlap: 0.35
   plaexLongSnapStabilizationFixedSteps: 2
   plaexLongPhysicsSnapJointBreakForce: 3000
   plaexLongPhysicsSnapJointBreakTorque: 3000
@@ -355,13 +356,9 @@ MonoBehaviour:
   enablePlaexSidePhysicsSnap: 1
   plaexSidePhysicsSnapNominalCenterSpacing: 5
   plaexSidePhysicsSnapCenterSpacingTolerance: 0.05
-  plaexSidePhysicsSnapMaxConnectorGap: 0.45
+  plaexSidePhysicsSnapMaxConnectorGap: 0.05
   plaexSidePhysicsSnapMaxLateralOffset: 0.05
   plaexSidePhysicsSnapMaxVerticalOffset: 0.05
-  enablePlaexSideSnapMagnetPull: 1
-  plaexSideSnapMagnetMaxOffsetX: 0.05
-  plaexSideSnapMagnetMaxOffsetY: 0.05
-  plaexSideSnapMagnetMaxOffsetZ: 0.05
   plaexSidePhysicsSnapRotationToleranceDegrees: 6
   plaexSidePhysicsSnapAllowedInterlockOverlap: 0.8
   plaexSidePhysicsSnapUseInsertionMotion: 1
@@ -371,6 +368,12 @@ MonoBehaviour:
   plaexSidePhysicsSnapJointBreakForce: 3000
   plaexSidePhysicsSnapJointBreakTorque: 3000
   logPlacementDebug: 1
+  enablePlanVideoRecording: 1
+  planVideoOutputDirectoryName: videos
+  planVideoFrameRate: 30
+  planVideoOutputWidth: 3840
+  planVideoOutputHeight: 2160
+  planVideoCaptureAudio: 0
 --- !u!1 &330585543
 GameObject:
   m_ObjectHideFlags: 0

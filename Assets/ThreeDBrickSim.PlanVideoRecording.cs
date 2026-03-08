@@ -5,14 +5,22 @@ using UnityEngine;
 #if UNITY_EDITOR
 using UnityEditor;
 using UnityEditor.Recorder;
+using UnityEditor.Recorder.Encoder;
 using UnityEditor.Recorder.Input;
 #endif
 
 public partial class ThreeDBrickSim
 {
+    private enum PlanVideoRecordingProfile
+    {
+        Fast,
+        Custom
+    }
+
     [Header("Plan Video Recording")]
     [SerializeField] private bool enablePlanVideoRecording = true;
     [SerializeField] private string planVideoOutputDirectoryName = "videos";
+    [SerializeField] private PlanVideoRecordingProfile planVideoRecordingProfile = PlanVideoRecordingProfile.Fast;
     [Min(1)]
     [SerializeField] private int planVideoFrameRate = 30;
     [Min(64)]
@@ -20,10 +28,13 @@ public partial class ThreeDBrickSim
     [Min(64)]
     [SerializeField] private int planVideoOutputHeight = 2160;
     [SerializeField] private bool planVideoCaptureAudio = false;
+    [SerializeField] private bool planVideoUseTargetedCameraInput = true;
+    [SerializeField] private bool planVideoCaptureUi = false;
 
 #if UNITY_EDITOR
     private RecorderController activePlanVideoRecorderController;
     private RecorderControllerSettings activePlanVideoRecorderSettings;
+    private MovieRecorderSettings activePlanVideoMovieRecorderSettings;
     private string activePlanVideoOutputPath;
 #endif
 
@@ -50,18 +61,22 @@ public partial class ThreeDBrickSim
         string absoluteOutputDirectory = Path.Combine(projectRoot, outputDirectoryName);
         Directory.CreateDirectory(absoluteOutputDirectory);
 
+        int outputWidth = ResolvePlanVideoOutputWidth();
+        int outputHeight = ResolvePlanVideoOutputHeight();
+        int frameRate = ResolvePlanVideoFrameRate();
+
         RecorderControllerSettings controllerSettings = ScriptableObject.CreateInstance<RecorderControllerSettings>();
         MovieRecorderSettings movieRecorderSettings = ScriptableObject.CreateInstance<MovieRecorderSettings>();
         movieRecorderSettings.name = "PlanExecutionRecorder";
         movieRecorderSettings.Enabled = true;
-        movieRecorderSettings.OutputFormat = MovieRecorderSettings.VideoRecorderOutputFormat.MP4;
-        movieRecorderSettings.VideoBitRateMode = VideoBitrateMode.High;
-        movieRecorderSettings.OutputFile = relativeOutputPath;
-        movieRecorderSettings.ImageInputSettings = new GameViewInputSettings
+        movieRecorderSettings.EncoderSettings = new CoreEncoderSettings
         {
-            OutputWidth = Mathf.Max(64, planVideoOutputWidth),
-            OutputHeight = Mathf.Max(64, planVideoOutputHeight)
+            Codec = CoreEncoderSettings.OutputCodec.MP4,
+            EncodingQuality = ResolvePlanVideoEncodingQuality()
         };
+        movieRecorderSettings.OutputFile = relativeOutputPath;
+        movieRecorderSettings.CaptureAudio = planVideoCaptureAudio;
+        movieRecorderSettings.ImageInputSettings = CreatePlanVideoInputSettings(outputWidth, outputHeight);
 
         if (movieRecorderSettings.AudioInputSettings != null)
         {
@@ -70,15 +85,22 @@ public partial class ThreeDBrickSim
 
         controllerSettings.AddRecorderSettings(movieRecorderSettings);
         controllerSettings.SetRecordModeToManual();
-        controllerSettings.FrameRate = Mathf.Max(1, planVideoFrameRate);
+        controllerSettings.FrameRate = frameRate;
         controllerSettings.CapFrameRate = true;
 
         RecorderController recorderController = new RecorderController(controllerSettings);
         recorderController.PrepareRecording();
-        recorderController.StartRecording();
+        if (!recorderController.StartRecording())
+        {
+            Destroy(movieRecorderSettings);
+            Destroy(controllerSettings);
+            Debug.LogWarning("StartPlanExecutionVideoRecording: Recorder failed to start.");
+            return;
+        }
 
         activePlanVideoRecorderController = recorderController;
         activePlanVideoRecorderSettings = controllerSettings;
+        activePlanVideoMovieRecorderSettings = movieRecorderSettings;
         activePlanVideoOutputPath = Path.Combine(absoluteOutputDirectory, fileNameWithoutExtension + ".mp4");
 
         Debug.Log($"Plan recording started: {activePlanVideoOutputPath}");
@@ -114,10 +136,66 @@ public partial class ThreeDBrickSim
             activePlanVideoRecorderSettings = null;
         }
 
+        if (activePlanVideoMovieRecorderSettings != null)
+        {
+            Destroy(activePlanVideoMovieRecorderSettings);
+            activePlanVideoMovieRecorderSettings = null;
+        }
+
         activePlanVideoRecorderController = null;
         activePlanVideoOutputPath = null;
 #endif
     }
+
+#if UNITY_EDITOR
+    private int ResolvePlanVideoFrameRate()
+    {
+        return planVideoRecordingProfile == PlanVideoRecordingProfile.Fast
+            ? 24
+            : Mathf.Max(1, planVideoFrameRate);
+    }
+
+    private int ResolvePlanVideoOutputWidth()
+    {
+        return planVideoRecordingProfile == PlanVideoRecordingProfile.Fast
+            ? 1280
+            : Mathf.Max(64, planVideoOutputWidth);
+    }
+
+    private int ResolvePlanVideoOutputHeight()
+    {
+        return planVideoRecordingProfile == PlanVideoRecordingProfile.Fast
+            ? 720
+            : Mathf.Max(64, planVideoOutputHeight);
+    }
+
+    private CoreEncoderSettings.VideoEncodingQuality ResolvePlanVideoEncodingQuality()
+    {
+        return planVideoRecordingProfile == PlanVideoRecordingProfile.Fast
+            ? CoreEncoderSettings.VideoEncodingQuality.Medium
+            : CoreEncoderSettings.VideoEncodingQuality.High;
+    }
+
+    private ImageInputSettings CreatePlanVideoInputSettings(int outputWidth, int outputHeight)
+    {
+        if (planVideoUseTargetedCameraInput)
+        {
+            return new CameraInputSettings
+            {
+                Source = ImageSource.MainCamera,
+                CaptureUI = planVideoCaptureUi,
+                OutputWidth = outputWidth,
+                OutputHeight = outputHeight
+            };
+        }
+
+        return new GameViewInputSettings
+        {
+            OutputWidth = outputWidth,
+            OutputHeight = outputHeight
+        };
+    }
+#endif
 
     private static string ResolveProjectRootPath()
     {

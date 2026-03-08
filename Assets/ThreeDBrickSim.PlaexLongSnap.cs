@@ -154,49 +154,66 @@ public partial class ThreeDBrickSim
             return true;
         }
 
-        float maxVerticalOffset = Mathf.Max(0.001f, plaexSidePhysicsSnapMaxVerticalOffset);
-        float rotationTolerance = Mathf.Max(0f, plaexSidePhysicsSnapRotationToleranceDegrees);
-        bool movingIsGreen = IsGreenPlaexSideTabBrick(movingBrick);
+        Vector3 originalPosition = movingBrick.position;
+        Quaternion originalRotation = movingBrick.rotation;
+        movingBrick.SetPositionAndRotation(snappedPosition, snappedRotation);
+        Physics.SyncTransforms();
 
-        foreach (Transform placedBrick in plannedWallBricks)
+        try
         {
-            if (placedBrick == null ||
-                placedBrick == movingBrick ||
-                detachedWallBricks.Contains(placedBrick) ||
-                !IsPlaexSideSnapBrick(placedBrick))
+            if (!TryBuildPlaexSideConnectors(movingBrick, out PlaexSideConnector[] movingConnectors))
             {
-                continue;
+                return true;
             }
 
-            bool placedIsGreen = IsGreenPlaexSideTabBrick(placedBrick);
-            if (placedIsGreen == movingIsGreen)
+            foreach (Transform placedBrick in plannedWallBricks)
             {
-                continue;
+                if (placedBrick == null ||
+                    placedBrick == movingBrick ||
+                    detachedWallBricks.Contains(placedBrick) ||
+                    !IsPlaexSideSnapBrick(placedBrick) ||
+                    !CanPlaexSideBrickTypesPotentiallyConnect(movingBrick, placedBrick))
+                {
+                    continue;
+                }
+
+                if (!TryBuildPlaexSideConnectors(placedBrick, out PlaexSideConnector[] placedConnectors))
+                {
+                    continue;
+                }
+
+                if (!TryFindBestPlaexSideConnectionToCandidate(
+                    movingBrick,
+                    movingConnectors,
+                    placedBrick,
+                    placedConnectors,
+                    enforceOccupancyAndClearance: true,
+                    out _,
+                    out _,
+                    out _,
+                    out _))
+                {
+                    continue;
+                }
+
+                if (!IsPlacementPoseBlocked(
+                    movingBrick,
+                    snappedPosition,
+                    snappedRotation,
+                    allowedSideInterlockBrick: placedBrick,
+                    requireExistingJointForAllowedInterlock: false))
+                {
+                    return false;
+                }
             }
 
-            if (Mathf.Abs(snappedPosition.y - placedBrick.position.y) > maxVerticalOffset)
-            {
-                continue;
-            }
-
-            float angle = Quaternion.Angle(snappedRotation, placedBrick.rotation);
-            if (angle > rotationTolerance)
-            {
-                continue;
-            }
-
-            if (!IsPlacementPoseBlocked(
-                movingBrick,
-                snappedPosition,
-                snappedRotation,
-                allowedSideInterlockBrick: placedBrick,
-                requireExistingJointForAllowedInterlock: false))
-            {
-                return false;
-            }
+            return true;
         }
-
-        return true;
+        finally
+        {
+            movingBrick.SetPositionAndRotation(originalPosition, originalRotation);
+            Physics.SyncTransforms();
+        }
     }
 
     private float ResolvePlaexLongInterlockHorizontalTolerance()

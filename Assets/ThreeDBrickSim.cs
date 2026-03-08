@@ -135,6 +135,8 @@ public partial class ThreeDBrickSim : MonoBehaviour
     [SerializeField] private float plaexSidePhysicsSnapMaxVerticalOffset = 0.05f;
     [SerializeField] private float plaexSidePhysicsSnapRotationToleranceDegrees = 6f;
     [SerializeField] private float plaexSidePhysicsSnapAllowedInterlockOverlap = 0.8f;
+    [SerializeField] private float plaexSideConnectorLocalClearanceRadius = 0.6f;
+    [SerializeField] private float plaexSidePerpendicularLongCornerAllowedOverlap = 0.35f;
     [SerializeField] private bool plaexSidePhysicsSnapUseInsertionMotion = true;
     [SerializeField] private float plaexSidePhysicsSnapInsertionLift = 1.5f;
     [SerializeField] private int plaexSideSnapInsertionFixedSteps = 12;
