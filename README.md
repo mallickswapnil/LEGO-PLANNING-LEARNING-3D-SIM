@@ -1,4 +1,4 @@
-# LEGO Planning Learning
+# LEGO/PLAEX Planning Learning
 
 Unity 6 simulation for plan-driven brick placement, physics snapping, and wall-break behavior.
 
