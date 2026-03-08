@@ -154,10 +154,6 @@ public partial class ThreeDBrickSim
             return true;
         }
 
-        float maxVerticalOffset = Mathf.Max(0.001f, plaexSidePhysicsSnapMaxVerticalOffset);
-        float rotationTolerance = Mathf.Max(0f, plaexSidePhysicsSnapRotationToleranceDegrees);
-        bool movingIsGreen = IsGreenPlaexSideTabBrick(movingBrick);
-
         foreach (Transform placedBrick in plannedWallBricks)
         {
             if (placedBrick == null ||
@@ -168,19 +164,7 @@ public partial class ThreeDBrickSim
                 continue;
             }
 
-            bool placedIsGreen = IsGreenPlaexSideTabBrick(placedBrick);
-            if (placedIsGreen == movingIsGreen)
-            {
-                continue;
-            }
-
-            if (Mathf.Abs(snappedPosition.y - placedBrick.position.y) > maxVerticalOffset)
-            {
-                continue;
-            }
-
-            float angle = Quaternion.Angle(snappedRotation, placedBrick.rotation);
-            if (angle > rotationTolerance)
+            if (!ArePlaexSideSnapBricksCompatible(movingBrick, placedBrick))
             {
                 continue;
             }

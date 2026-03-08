@@ -1,14 +1,14 @@
 {
   "steps": [
     {
-      "brickId": "InventoryYellowPlaexSideBrick_250",
+      "brickId": "InventoryGreenPlaexLongBrick_250",
       "targetPosition": { "x": 0.0, "y": 1.0, "z": 0.0 },
       "targetRotation": { "x": 0.0, "y": 0.0, "z": 0.0 },
       "delay": 0.25
     },
     {
-      "brickId": "InventoryOrangePlaexLongBrick_250",
-      "targetPosition": { "x": 2.0, "y": 1.0, "z": 0.0 },
+      "brickId": "InventoryGreenPlaexLongBrick_249",
+      "targetPosition": { "x": 5.0, "y": 1.0, "z": 0.0 },
       "targetRotation": { "x": 0.0, "y": 0.0, "z": 0.0 },
       "delay": 0.25
     }

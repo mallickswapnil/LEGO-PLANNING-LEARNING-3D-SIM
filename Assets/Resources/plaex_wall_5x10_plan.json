@@ -1,0 +1,704 @@
+{
+    "steps":  [
+                  {
+                      "brickId":  "InventoryYellowPlaexSideBrick_250",
+                      "targetPosition":  {
+                                             "x":  0,
+                                             "y":  1,
+                                             "z":  0
+                                         },
+                      "targetRotation":  {
+                                             "x":  0,
+                                             "y":  0,
+                                             "z":  0
+                                         },
+                      "delay":  0.25
+                  },
+                  {
+                      "brickId":  "InventoryYellowPlaexSideBrick_249",
+                      "targetPosition":  {
+                                             "x":  0,
+                                             "y":  3,
+                                             "z":  0
+                                         },
+                      "targetRotation":  {
+                                             "x":  0,
+                                             "y":  0,
+                                             "z":  0
+                                         },
+                      "delay":  0.25
+                  },
+                  {
+                      "brickId":  "InventoryYellowPlaexSideBrick_248",
+                      "targetPosition":  {
+                                             "x":  0,
+                                             "y":  5,
+                                             "z":  0
+                                         },
+                      "targetRotation":  {
+                                             "x":  0,
+                                             "y":  0,
+                                             "z":  0
+                                         },
+                      "delay":  0.25
+                  },
+                  {
+                      "brickId":  "InventoryYellowPlaexSideBrick_247",
+                      "targetPosition":  {
+                                             "x":  0,
+                                             "y":  7,
+                                             "z":  0
+                                         },
+                      "targetRotation":  {
+                                             "x":  0,
+                                             "y":  0,
+                                             "z":  0
+                                         },
+                      "delay":  0.25
+                  },
+                  {
+                      "brickId":  "InventoryYellowPlaexSideBrick_246",
+                      "targetPosition":  {
+                                             "x":  0,
+                                             "y":  9,
+                                             "z":  0
+                                         },
+                      "targetRotation":  {
+                                             "x":  0,
+                                             "y":  0,
+                                             "z":  0
+                                         },
+                      "delay":  0.25
+                  },
+                  {
+                      "brickId":  "InventoryYellowPlaexSideBrick_245",
+                      "targetPosition":  {
+                                             "x":  0,
+                                             "y":  11,
+                                             "z":  0
+                                         },
+                      "targetRotation":  {
+                                             "x":  0,
+                                             "y":  0,
+                                             "z":  0
+                                         },
+                      "delay":  0.25
+                  },
+                  {
+                      "brickId":  "InventoryYellowPlaexSideBrick_244",
+                      "targetPosition":  {
+                                             "x":  0,
+                                             "y":  13,
+                                             "z":  0
+                                         },
+                      "targetRotation":  {
+                                             "x":  0,
+                                             "y":  0,
+                                             "z":  0
+                                         },
+                      "delay":  0.25
+                  },
+                  {
+                      "brickId":  "InventoryYellowPlaexSideBrick_243",
+                      "targetPosition":  {
+                                             "x":  0,
+                                             "y":  15,
+                                             "z":  0
+                                         },
+                      "targetRotation":  {
+                                             "x":  0,
+                                             "y":  0,
+                                             "z":  0
+                                         },
+                      "delay":  0.25
+                  },
+                  {
+                      "brickId":  "InventoryYellowPlaexSideBrick_242",
+                      "targetPosition":  {
+                                             "x":  0,
+                                             "y":  17,
+                                             "z":  0
+                                         },
+                      "targetRotation":  {
+                                             "x":  0,
+                                             "y":  0,
+                                             "z":  0
+                                         },
+                      "delay":  0.25
+                  },
+                  {
+                      "brickId":  "InventoryYellowPlaexSideBrick_241",
+                      "targetPosition":  {
+                                             "x":  0,
+                                             "y":  19,
+                                             "z":  0
+                                         },
+                      "targetRotation":  {
+                                             "x":  0,
+                                             "y":  0,
+                                             "z":  0
+                                         },
+                      "delay":  0.25
+                  },
+                  {
+                      "brickId":  "InventoryOrangePlaexLongBrick_250",
+                      "targetPosition":  {
+                                             "x":  3.5,
+                                             "y":  1,
+                                             "z":  0
+                                         },
+                      "targetRotation":  {
+                                             "x":  0,
+                                             "y":  0,
+                                             "z":  0
+                                         },
+                      "delay":  0.25
+                  },
+                  {
+                      "brickId":  "InventoryOrangePlaexLongBrick_249",
+                      "targetPosition":  {
+                                             "x":  3.5,
+                                             "y":  3,
+                                             "z":  0
+                                         },
+                      "targetRotation":  {
+                                             "x":  0,
+                                             "y":  0,
+                                             "z":  0
+                                         },
+                      "delay":  0.25
+                  },
+                  {
+                      "brickId":  "InventoryOrangePlaexLongBrick_248",
+                      "targetPosition":  {
+                                             "x":  3.5,
+                                             "y":  5,
+                                             "z":  0
+                                         },
+                      "targetRotation":  {
+                                             "x":  0,
+                                             "y":  0,
+                                             "z":  0
+                                         },
+                      "delay":  0.25
+                  },
+                  {
+                      "brickId":  "InventoryOrangePlaexLongBrick_247",
+                      "targetPosition":  {
+                                             "x":  3.5,
+                                             "y":  7,
+                                             "z":  0
+                                         },
+                      "targetRotation":  {
+                                             "x":  0,
+                                             "y":  0,
+                                             "z":  0
+                                         },
+                      "delay":  0.25
+                  },
+                  {
+                      "brickId":  "InventoryOrangePlaexLongBrick_246",
+                      "targetPosition":  {
+                                             "x":  3.5,
+                                             "y":  9,
+                                             "z":  0
+                                         },
+                      "targetRotation":  {
+                                             "x":  0,
+                                             "y":  0,
+                                             "z":  0
+                                         },
+                      "delay":  0.25
+                  },
+                  {
+                      "brickId":  "InventoryOrangePlaexLongBrick_245",
+                      "targetPosition":  {
+                                             "x":  3.5,
+                                             "y":  11,
+                                             "z":  0
+                                         },
+                      "targetRotation":  {
+                                             "x":  0,
+                                             "y":  0,
+                                             "z":  0
+                                         },
+                      "delay":  0.25
+                  },
+                  {
+                      "brickId":  "InventoryOrangePlaexLongBrick_244",
+                      "targetPosition":  {
+                                             "x":  3.5,
+                                             "y":  13,
+                                             "z":  0
+                                         },
+                      "targetRotation":  {
+                                             "x":  0,
+                                             "y":  0,
+                                             "z":  0
+                                         },
+                      "delay":  0.25
+                  },
+                  {
+                      "brickId":  "InventoryOrangePlaexLongBrick_243",
+                      "targetPosition":  {
+                                             "x":  3.5,
+                                             "y":  15,
+                                             "z":  0
+                                         },
+                      "targetRotation":  {
+                                             "x":  0,
+                                             "y":  0,
+                                             "z":  0
+                                         },
+                      "delay":  0.25
+                  },
+                  {
+                      "brickId":  "InventoryOrangePlaexLongBrick_242",
+                      "targetPosition":  {
+                                             "x":  3.5,
+                                             "y":  17,
+                                             "z":  0
+                                         },
+                      "targetRotation":  {
+                                             "x":  0,
+                                             "y":  0,
+                                             "z":  0
+                                         },
+                      "delay":  0.25
+                  },
+                  {
+                      "brickId":  "InventoryOrangePlaexLongBrick_241",
+                      "targetPosition":  {
+                                             "x":  3.5,
+                                             "y":  19,
+                                             "z":  0
+                                         },
+                      "targetRotation":  {
+                                             "x":  0,
+                                             "y":  0,
+                                             "z":  0
+                                         },
+                      "delay":  0.25
+                  },
+                  {
+                      "brickId":  "InventoryGreenPlaexLongBrick_250",
+                      "targetPosition":  {
+                                             "x":  8.5,
+                                             "y":  1,
+                                             "z":  0
+                                         },
+                      "targetRotation":  {
+                                             "x":  0,
+                                             "y":  0,
+                                             "z":  0
+                                         },
+                      "delay":  0.25
+                  },
+                  {
+                      "brickId":  "InventoryGreenPlaexLongBrick_249",
+                      "targetPosition":  {
+                                             "x":  8.5,
+                                             "y":  3,
+                                             "z":  0
+                                         },
+                      "targetRotation":  {
+                                             "x":  0,
+                                             "y":  0,
+                                             "z":  0
+                                         },
+                      "delay":  0.25
+                  },
+                  {
+                      "brickId":  "InventoryGreenPlaexLongBrick_248",
+                      "targetPosition":  {
+                                             "x":  8.5,
+                                             "y":  5,
+                                             "z":  0
+                                         },
+                      "targetRotation":  {
+                                             "x":  0,
+                                             "y":  0,
+                                             "z":  0
+                                         },
+                      "delay":  0.25
+                  },
+                  {
+                      "brickId":  "InventoryGreenPlaexLongBrick_247",
+                      "targetPosition":  {
+                                             "x":  8.5,
+                                             "y":  7,
+                                             "z":  0
+                                         },
+                      "targetRotation":  {
+                                             "x":  0,
+                                             "y":  0,
+                                             "z":  0
+                                         },
+                      "delay":  0.25
+                  },
+                  {
+                      "brickId":  "InventoryGreenPlaexLongBrick_246",
+                      "targetPosition":  {
+                                             "x":  8.5,
+                                             "y":  9,
+                                             "z":  0
+                                         },
+                      "targetRotation":  {
+                                             "x":  0,
+                                             "y":  0,
+                                             "z":  0
+                                         },
+                      "delay":  0.25
+                  },
+                  {
+                      "brickId":  "InventoryGreenPlaexLongBrick_245",
+                      "targetPosition":  {
+                                             "x":  8.5,
+                                             "y":  11,
+                                             "z":  0
+                                         },
+                      "targetRotation":  {
+                                             "x":  0,
+                                             "y":  0,
+                                             "z":  0
+                                         },
+                      "delay":  0.25
+                  },
+                  {
+                      "brickId":  "InventoryGreenPlaexLongBrick_244",
+                      "targetPosition":  {
+                                             "x":  8.5,
+                                             "y":  13,
+                                             "z":  0
+                                         },
+                      "targetRotation":  {
+                                             "x":  0,
+                                             "y":  0,
+                                             "z":  0
+                                         },
+                      "delay":  0.25
+                  },
+                  {
+                      "brickId":  "InventoryGreenPlaexLongBrick_243",
+                      "targetPosition":  {
+                                             "x":  8.5,
+                                             "y":  15,
+                                             "z":  0
+                                         },
+                      "targetRotation":  {
+                                             "x":  0,
+                                             "y":  0,
+                                             "z":  0
+                                         },
+                      "delay":  0.25
+                  },
+                  {
+                      "brickId":  "InventoryGreenPlaexLongBrick_242",
+                      "targetPosition":  {
+                                             "x":  8.5,
+                                             "y":  17,
+                                             "z":  0
+                                         },
+                      "targetRotation":  {
+                                             "x":  0,
+                                             "y":  0,
+                                             "z":  0
+                                         },
+                      "delay":  0.25
+                  },
+                  {
+                      "brickId":  "InventoryGreenPlaexLongBrick_241",
+                      "targetPosition":  {
+                                             "x":  8.5,
+                                             "y":  19,
+                                             "z":  0
+                                         },
+                      "targetRotation":  {
+                                             "x":  0,
+                                             "y":  0,
+                                             "z":  0
+                                         },
+                      "delay":  0.25
+                  },
+                  {
+                      "brickId":  "InventoryOrangePlaexLongBrick_240",
+                      "targetPosition":  {
+                                             "x":  13.5,
+                                             "y":  1,
+                                             "z":  0
+                                         },
+                      "targetRotation":  {
+                                             "x":  0,
+                                             "y":  0,
+                                             "z":  0
+                                         },
+                      "delay":  0.25
+                  },
+                  {
+                      "brickId":  "InventoryOrangePlaexLongBrick_239",
+                      "targetPosition":  {
+                                             "x":  13.5,
+                                             "y":  3,
+                                             "z":  0
+                                         },
+                      "targetRotation":  {
+                                             "x":  0,
+                                             "y":  0,
+                                             "z":  0
+                                         },
+                      "delay":  0.25
+                  },
+                  {
+                      "brickId":  "InventoryOrangePlaexLongBrick_238",
+                      "targetPosition":  {
+                                             "x":  13.5,
+                                             "y":  5,
+                                             "z":  0
+                                         },
+                      "targetRotation":  {
+                                             "x":  0,
+                                             "y":  0,
+                                             "z":  0
+                                         },
+                      "delay":  0.25
+                  },
+                  {
+                      "brickId":  "InventoryOrangePlaexLongBrick_237",
+                      "targetPosition":  {
+                                             "x":  13.5,
+                                             "y":  7,
+                                             "z":  0
+                                         },
+                      "targetRotation":  {
+                                             "x":  0,
+                                             "y":  0,
+                                             "z":  0
+                                         },
+                      "delay":  0.25
+                  },
+                  {
+                      "brickId":  "InventoryOrangePlaexLongBrick_236",
+                      "targetPosition":  {
+                                             "x":  13.5,
+                                             "y":  9,
+                                             "z":  0
+                                         },
+                      "targetRotation":  {
+                                             "x":  0,
+                                             "y":  0,
+                                             "z":  0
+                                         },
+                      "delay":  0.25
+                  },
+                  {
+                      "brickId":  "InventoryOrangePlaexLongBrick_235",
+                      "targetPosition":  {
+                                             "x":  13.5,
+                                             "y":  11,
+                                             "z":  0
+                                         },
+                      "targetRotation":  {
+                                             "x":  0,
+                                             "y":  0,
+                                             "z":  0
+                                         },
+                      "delay":  0.25
+                  },
+                  {
+                      "brickId":  "InventoryOrangePlaexLongBrick_234",
+                      "targetPosition":  {
+                                             "x":  13.5,
+                                             "y":  13,
+                                             "z":  0
+                                         },
+                      "targetRotation":  {
+                                             "x":  0,
+                                             "y":  0,
+                                             "z":  0
+                                         },
+                      "delay":  0.25
+                  },
+                  {
+                      "brickId":  "InventoryOrangePlaexLongBrick_233",
+                      "targetPosition":  {
+                                             "x":  13.5,
+                                             "y":  15,
+                                             "z":  0
+                                         },
+                      "targetRotation":  {
+                                             "x":  0,
+                                             "y":  0,
+                                             "z":  0
+                                         },
+                      "delay":  0.25
+                  },
+                  {
+                      "brickId":  "InventoryOrangePlaexLongBrick_232",
+                      "targetPosition":  {
+                                             "x":  13.5,
+                                             "y":  17,
+                                             "z":  0
+                                         },
+                      "targetRotation":  {
+                                             "x":  0,
+                                             "y":  0,
+                                             "z":  0
+                                         },
+                      "delay":  0.25
+                  },
+                  {
+                      "brickId":  "InventoryOrangePlaexLongBrick_231",
+                      "targetPosition":  {
+                                             "x":  13.5,
+                                             "y":  19,
+                                             "z":  0
+                                         },
+                      "targetRotation":  {
+                                             "x":  0,
+                                             "y":  0,
+                                             "z":  0
+                                         },
+                      "delay":  0.25
+                  },
+                  {
+                      "brickId":  "InventoryYellowPlaexSideBrick_240",
+                      "targetPosition":  {
+                                             "x":  17,
+                                             "y":  1,
+                                             "z":  0
+                                         },
+                      "targetRotation":  {
+                                             "x":  0,
+                                             "y":  0,
+                                             "z":  0
+                                         },
+                      "delay":  0.25
+                  },
+                  {
+                      "brickId":  "InventoryYellowPlaexSideBrick_239",
+                      "targetPosition":  {
+                                             "x":  17,
+                                             "y":  3,
+                                             "z":  0
+                                         },
+                      "targetRotation":  {
+                                             "x":  0,
+                                             "y":  0,
+                                             "z":  0
+                                         },
+                      "delay":  0.25
+                  },
+                  {
+                      "brickId":  "InventoryYellowPlaexSideBrick_238",
+                      "targetPosition":  {
+                                             "x":  17,
+                                             "y":  5,
+                                             "z":  0
+                                         },
+                      "targetRotation":  {
+                                             "x":  0,
+                                             "y":  0,
+                                             "z":  0
+                                         },
+                      "delay":  0.25
+                  },
+                  {
+                      "brickId":  "InventoryYellowPlaexSideBrick_237",
+                      "targetPosition":  {
+                                             "x":  17,
+                                             "y":  7,
+                                             "z":  0
+                                         },
+                      "targetRotation":  {
+                                             "x":  0,
+                                             "y":  0,
+                                             "z":  0
+                                         },
+                      "delay":  0.25
+                  },
+                  {
+                      "brickId":  "InventoryYellowPlaexSideBrick_236",
+                      "targetPosition":  {
+                                             "x":  17,
+                                             "y":  9,
+                                             "z":  0
+                                         },
+                      "targetRotation":  {
+                                             "x":  0,
+                                             "y":  0,
+                                             "z":  0
+                                         },
+                      "delay":  0.25
+                  },
+                  {
+                      "brickId":  "InventoryYellowPlaexSideBrick_235",
+                      "targetPosition":  {
+                                             "x":  17,
+                                             "y":  11,
+                                             "z":  0
+                                         },
+                      "targetRotation":  {
+                                             "x":  0,
+                                             "y":  0,
+                                             "z":  0
+                                         },
+                      "delay":  0.25
+                  },
+                  {
+                      "brickId":  "InventoryYellowPlaexSideBrick_234",
+                      "targetPosition":  {
+                                             "x":  17,
+                                             "y":  13,
+                                             "z":  0
+                                         },
+                      "targetRotation":  {
+                                             "x":  0,
+                                             "y":  0,
+                                             "z":  0
+                                         },
+                      "delay":  0.25
+                  },
+                  {
+                      "brickId":  "InventoryYellowPlaexSideBrick_233",
+                      "targetPosition":  {
+                                             "x":  17,
+                                             "y":  15,
+                                             "z":  0
+                                         },
+                      "targetRotation":  {
+                                             "x":  0,
+                                             "y":  0,
+                                             "z":  0
+                                         },
+                      "delay":  0.25
+                  },
+                  {
+                      "brickId":  "InventoryYellowPlaexSideBrick_232",
+                      "targetPosition":  {
+                                             "x":  17,
+                                             "y":  17,
+                                             "z":  0
+                                         },
+                      "targetRotation":  {
+                                             "x":  0,
+                                             "y":  0,
+                                             "z":  0
+                                         },
+                      "delay":  0.25
+                  },
+                  {
+                      "brickId":  "InventoryYellowPlaexSideBrick_231",
+                      "targetPosition":  {
+                                             "x":  17,
+                                             "y":  19,
+                                             "z":  0
+                                         },
+                      "targetRotation":  {
+                                             "x":  0,
+                                             "y":  0,
+                                             "z":  0
+                                         },
+                      "delay":  0.25
+                  }
+              ]
+}

@@ -447,7 +447,10 @@ public partial class ThreeDBrickSim
             enablePlaexSidePhysicsSnap;
         bool canResolveOverlapViaSnap = isSnapManagedPlaexBrick || isSnapManagedPlaexSideBrick;
         bool requiresPlaexSideSnap =
-            ShouldRequirePlaexSideSnapConnection(brickTransform);
+            ShouldRequirePlaexSideSnapConnection(
+                brickTransform,
+                targetLocation,
+                targetRotation);
         bool requiresPlaexLongVerticalSnap =
             ShouldRequirePlaexLongVerticalSnapConnection(brickTransform, targetLocation);
         if (logPlacementDebug && IsPlaexLongBrick(brickTransform))
@@ -571,7 +574,10 @@ public partial class ThreeDBrickSim
         return true;
     }
 
-    private bool ShouldRequirePlaexSideSnapConnection(Transform movingBrick)
+    private bool ShouldRequirePlaexSideSnapConnection(
+        Transform movingBrick,
+        Vector3 targetPosition,
+        Quaternion targetRotation)
     {
         if (!enablePlaexSidePhysicsSnap ||
             !requirePlaexSideSnapConnectionWhenComplementaryExists ||
@@ -580,7 +586,10 @@ public partial class ThreeDBrickSim
             return false;
         }
 
-        return HasComplementaryPlacedPlaexSideBrick(movingBrick);
+        return IsWithinRequiredPlaexSideSnapWindow(
+            movingBrick,
+            targetPosition,
+            targetRotation);
     }
 
     private bool ShouldRequirePlaexLongVerticalSnapConnection(
@@ -696,7 +705,6 @@ public partial class ThreeDBrickSim
             return false;
         }
 
-        bool movingIsGreen = IsGreenPlaexSideTabBrick(movingBrick);
         foreach (Transform placedBrick in plannedWallBricks)
         {
             if (placedBrick == null ||
@@ -707,8 +715,7 @@ public partial class ThreeDBrickSim
                 continue;
             }
 
-            bool placedIsGreen = IsGreenPlaexSideTabBrick(placedBrick);
-            if (placedIsGreen == movingIsGreen)
+            if (!ArePlaexSideSnapBricksCompatible(movingBrick, placedBrick))
             {
                 continue;
             }
@@ -741,9 +748,7 @@ public partial class ThreeDBrickSim
                 continue;
             }
 
-            bool movingIsGreen = IsGreenPlaexSideTabBrick(movingBrick);
-            bool connectedIsGreen = IsGreenPlaexSideTabBrick(connectedBrick);
-            if (movingIsGreen == connectedIsGreen)
+            if (!ArePlaexSideSnapBricksCompatible(movingBrick, connectedBrick))
             {
                 continue;
             }
@@ -764,76 +769,46 @@ public partial class ThreeDBrickSim
             return true;
         }
 
-        float nominalCenterSpacing = Mathf.Max(0.01f, plaexSidePhysicsSnapNominalCenterSpacing);
-        float centerSpacingTolerance = Mathf.Max(0.001f, plaexSidePhysicsSnapCenterSpacingTolerance);
-        float maxLateralOffset = Mathf.Max(0.001f, plaexSidePhysicsSnapMaxLateralOffset);
-        float maxVerticalOffset = Mathf.Max(0.001f, plaexSidePhysicsSnapMaxVerticalOffset);
-        float rotationTolerance = Mathf.Max(0f, plaexSidePhysicsSnapRotationToleranceDegrees);
-        bool movingIsGreen = IsGreenPlaexSideTabBrick(movingBrick);
+        Vector3 originalPosition = movingBrick.position;
+        Quaternion originalRotation = movingBrick.rotation;
+        movingBrick.SetPositionAndRotation(targetPosition, targetRotation);
+        Physics.SyncTransforms();
 
-        foreach (Transform placedBrick in plannedWallBricks)
+        try
         {
-            if (placedBrick == null ||
-                placedBrick == movingBrick ||
-                detachedWallBricks.Contains(placedBrick) ||
-                !IsPlaexSideSnapBrick(placedBrick))
+            if (!TryBuildPlaexSideConnectors(movingBrick, out PlaexSideConnector[] movingConnectors))
             {
-                continue;
+                return false;
             }
 
-            bool placedIsGreen = IsGreenPlaexSideTabBrick(placedBrick);
-            if (placedIsGreen == movingIsGreen)
+            foreach (Transform placedBrick in plannedWallBricks)
             {
-                continue;
-            }
-
-            float angle = Quaternion.Angle(targetRotation, placedBrick.rotation);
-            if (angle > rotationTolerance)
-            {
-                continue;
-            }
-
-            if (!TryBuildPlaexSideConnectors(placedBrick, out PlaexSideConnector[] placedConnectors))
-            {
-                continue;
-            }
-
-            for (int connectorIndex = 0; connectorIndex < placedConnectors.Length; connectorIndex++)
-            {
-                PlaexSideConnector connector = placedConnectors[connectorIndex];
-                if (!TryBuildWorldHorizontalSnapFrame(
-                    connector.outwardNormal,
-                    out Vector3 axis,
-                    out Vector3 lateralAxis))
+                if (placedBrick == null ||
+                    placedBrick == movingBrick ||
+                    detachedWallBricks.Contains(placedBrick) ||
+                    !IsPlaexSideSnapBrick(placedBrick))
                 {
                     continue;
                 }
 
-                Vector3 delta = targetPosition - placedBrick.position;
-                float centerDistanceAlongAxis = Mathf.Abs(Vector3.Dot(delta, axis));
-                float spacingOffset = Mathf.Abs(centerDistanceAlongAxis - nominalCenterSpacing);
-                if (spacingOffset > centerSpacingTolerance)
-                {
-                    continue;
-                }
-
-                float verticalOffset = Mathf.Abs(targetPosition.y - placedBrick.position.y);
-                if (verticalOffset > maxVerticalOffset)
-                {
-                    continue;
-                }
-
-                float lateralOffset = Mathf.Abs(Vector3.Dot(delta, lateralAxis));
-                if (lateralOffset > maxLateralOffset)
+                if (!HasCompatiblePlaexSideAlignmentAtCurrentPose(
+                    movingBrick,
+                    movingConnectors,
+                    placedBrick))
                 {
                     continue;
                 }
 
                 return true;
             }
-        }
 
-        return false;
+            return false;
+        }
+        finally
+        {
+            movingBrick.SetPositionAndRotation(originalPosition, originalRotation);
+            Physics.SyncTransforms();
+        }
     }
 
     private static Transform FindBrickTransformById(string brickId)
@@ -1089,9 +1064,7 @@ public partial class ThreeDBrickSim
             return false;
         }
 
-        bool movingIsGreen = IsGreenPlaexSideTabBrick(movingBrick);
-        bool otherIsGreen = IsGreenPlaexSideTabBrick(otherBrick);
-        if (movingIsGreen == otherIsGreen)
+        if (!ArePlaexSideSnapBricksCompatible(movingBrick, otherBrick))
         {
             return false;
         }
@@ -1102,14 +1075,7 @@ public partial class ThreeDBrickSim
             return false;
         }
 
-        float maxVerticalOffset = Mathf.Max(0.001f, plaexSidePhysicsSnapMaxVerticalOffset);
-        if (Mathf.Abs(movingBrick.position.y - otherBrick.position.y) > maxVerticalOffset)
-        {
-            return false;
-        }
-
-        float rotationTolerance = Mathf.Max(0f, plaexSidePhysicsSnapRotationToleranceDegrees);
-        if (Quaternion.Angle(movingBrick.rotation, otherBrick.rotation) > rotationTolerance)
+        if (!HasCompatiblePlaexSideAlignmentAtCurrentPose(movingBrick, otherBrick))
         {
             return false;
         }

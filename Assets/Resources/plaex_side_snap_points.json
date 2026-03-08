@@ -1,0 +1,67 @@
+﻿{
+  "bricks": [
+    {
+      "brickKind": "GreenLong",
+      "points": [
+        {
+          "name": "Tab_PositiveX",
+          "connectorKind": "Tab",
+          "localPosition": { "x": 2.5, "y": 0.0, "z": 0.0 },
+          "localForward": { "x": 1.0, "y": 0.0, "z": 0.0 }
+        },
+        {
+          "name": "Tab_NegativeX",
+          "connectorKind": "Tab",
+          "localPosition": { "x": -2.5, "y": 0.0, "z": 0.0 },
+          "localForward": { "x": -1.0, "y": 0.0, "z": 0.0 }
+        }
+      ]
+    },
+    {
+      "brickKind": "OrangeLong",
+      "points": [
+        {
+          "name": "Cavity_PositiveX",
+          "connectorKind": "Cavity",
+          "localPosition": { "x": 2.5, "y": 0.0, "z": 0.0 },
+          "localForward": { "x": 1.0, "y": 0.0, "z": 0.0 }
+        },
+        {
+          "name": "Cavity_NegativeX",
+          "connectorKind": "Cavity",
+          "localPosition": { "x": -2.5, "y": 0.0, "z": 0.0 },
+          "localForward": { "x": -1.0, "y": 0.0, "z": 0.0 }
+        }
+      ]
+    },
+    {
+      "brickKind": "YellowSide",
+      "points": [
+        {
+          "name": "Tab_PositiveX",
+          "connectorKind": "Tab",
+          "localPosition": { "x": 1.0, "y": 0.0, "z": 0.0 },
+          "localForward": { "x": 1.0, "y": 0.0, "z": 0.0 }
+        },
+        {
+          "name": "Tab_NegativeX",
+          "connectorKind": "Tab",
+          "localPosition": { "x": -1.0, "y": 0.0, "z": 0.0 },
+          "localForward": { "x": -1.0, "y": 0.0, "z": 0.0 }
+        },
+        {
+          "name": "Cavity_PositiveZ",
+          "connectorKind": "Cavity",
+          "localPosition": { "x": 0.0, "y": 0.0, "z": 1.0 },
+          "localForward": { "x": 0.0, "y": 0.0, "z": 1.0 }
+        },
+        {
+          "name": "Tab_NegativeZ",
+          "connectorKind": "Tab",
+          "localPosition": { "x": 0.0, "y": 0.0, "z": -1.0 },
+          "localForward": { "x": 0.0, "y": 0.0, "z": -1.0 }
+        }
+      ]
+    }
+  ]
+}

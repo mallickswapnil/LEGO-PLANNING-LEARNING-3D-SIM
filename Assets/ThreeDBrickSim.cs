@@ -130,7 +130,7 @@ public partial class ThreeDBrickSim : MonoBehaviour
     [SerializeField] private bool enablePlaexSidePhysicsSnap = true;
     [SerializeField] private float plaexSidePhysicsSnapNominalCenterSpacing = 5f;
     [SerializeField] private float plaexSidePhysicsSnapCenterSpacingTolerance = 0.05f;
-    [SerializeField] private float plaexSidePhysicsSnapMaxConnectorGap = 1.25f;
+    [SerializeField] private float plaexSidePhysicsSnapMaxConnectorGap = 0.05f;
     [SerializeField] private float plaexSidePhysicsSnapMaxLateralOffset = 0.05f;
     [SerializeField] private float plaexSidePhysicsSnapMaxVerticalOffset = 0.05f;
     [SerializeField] private float plaexSidePhysicsSnapRotationToleranceDegrees = 6f;

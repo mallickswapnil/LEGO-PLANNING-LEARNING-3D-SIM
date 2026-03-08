@@ -76,7 +76,7 @@ public partial class ThreeDBrickSim
         }
         finally
         {
-            // StopPlanExecutionVideoRecording();
+            StopPlanExecutionVideoRecording();
         }
     }
 
@@ -378,8 +378,8 @@ public partial class ThreeDBrickSim
             activePlanCoroutine = null;
         }
 
-        // StopPlanExecutionVideoRecording();
-        // StartPlanExecutionVideoRecording(resourceName);
+        StopPlanExecutionVideoRecording();
+        StartPlanExecutionVideoRecording(resourceName);
         activePlanCoroutine = StartCoroutine(ExecutePlanFromResources(resourceName));
     }
 
@@ -391,7 +391,7 @@ public partial class ThreeDBrickSim
             activePlanCoroutine = null;
         }
 
-        // StopPlanExecutionVideoRecording();
+        StopPlanExecutionVideoRecording();
         Scene activeScene = SceneManager.GetActiveScene();
         SceneManager.LoadScene(activeScene.buildIndex);
     }
