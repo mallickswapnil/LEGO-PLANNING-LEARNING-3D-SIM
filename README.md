@@ -23,6 +23,8 @@ Unity 6 simulation for plan-driven brick placement, physics snapping, and wall-b
   - PLAEX long vertical snap (stacking).
   - PLAEX side tab/cavity snap with optional insertion animation.
 - Supports break input for placed wall bricks with support propagation and depth-based click thresholds.
+- Supports editor-only MP4 plan export through Unity Recorder (`com.unity.recorder`).
+- Supports a recording-only close-follow camera that frames the active placement area during video export.
 
 ## How To Run
 1. Open the project in Unity.
@@ -31,11 +33,18 @@ Unity 6 simulation for plan-driven brick placement, physics snapping, and wall-b
 4. In the top-left runtime panel:
    - Select a plan from the dropdown to execute it.
    - Click `Refresh` to reload the current scene.
+   - Click `Export Video` to restart the scene, run the selected plan, and save an MP4 to `videos/`.
 
 ## Controls (Default)
 - Camera orbit: hold `Ctrl` + hold left mouse + drag.
 - Break placed wall bricks: hold `Left Shift` + left click.
 - These are configurable on the `ThreeDBrickSim` component.
+
+## Video Export
+- Requires `com.unity.recorder` (present in `Packages/manifest.json`).
+- Export is supported in the Unity Editor only.
+- Recorder output is written to the project-local `videos/` directory.
+- The recording camera can use a closer interior/follow framing via the `Plan Video Camera` settings on `ThreeDBrickSim`.
 
 ## Plan Files (Currently In `Assets/Resources`)
 - `brick_plan.json`
@@ -48,6 +57,7 @@ Unity 6 simulation for plan-driven brick placement, physics snapping, and wall-b
 - `green_plaex_overlap_plan.json`
 - `green_plaex_stack_5_plan.json`
 - `plaex_side_snap_test_plan.json`
+- `plaex_room_4x4_plan.json`
 - `plaex_wall_10x5_plan.json`
 
 ## Plan JSON Format
@@ -86,7 +96,7 @@ Rules:
 - `Assets/ThreeDBrickSim.Environment.cs`
   - Bounds/inventory creation, rigidbody/collider setup, `PickOrientAndPlaceBrick`.
 - `Assets/ThreeDBrickSim.PlanExecution.cs`
-  - Runtime plan UI, `_plan` discovery, coroutine execution, scene refresh.
+  - Runtime plan UI, `_plan` discovery, coroutine execution, scene refresh, queued export flow.
 - `Assets/ThreeDBrickSim.CameraInput.cs`
   - Orbit camera setup and drag input.
 - `Assets/ThreeDBrickSim.WallPhysics.cs`
@@ -99,7 +109,8 @@ Rules:
   - PLAEX side connector matching and insertion snap animation.
 - `Assets/ThreeDBrickSim.PlanVideoRecording.cs`
   - Editor-only recording helpers (`com.unity.recorder`), output to `videos/`.
-  - Note: start/stop calls are currently commented in plan execution flow.
+- `Assets/ThreeDBrickSim.PlanVideoCamera.cs`
+  - Recording-only close-follow camera framing for exported videos.
 - Inventory/spawn helpers:
   - `Assets/ThreeDBrickSim.OrangeLegoBrickInventory.cs`
   - `Assets/ThreeDBrickSim.GreenPlaexLongBrickInventory.cs`
