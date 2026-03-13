@@ -39,7 +39,7 @@ public partial class ThreeDBrickSim
 
     private void HandleCameraDragInput()
     {
-        if (!enableCameraDrag || controlledCamera == null)
+        if (!enableCameraDrag || controlledCamera == null || IsPlanVideoCloseFollowCameraActive())
         {
             return;
         }

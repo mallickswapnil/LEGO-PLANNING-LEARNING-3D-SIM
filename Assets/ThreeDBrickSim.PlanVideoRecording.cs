@@ -30,6 +30,17 @@ public partial class ThreeDBrickSim
     [SerializeField] private bool planVideoCaptureAudio = false;
     [SerializeField] private bool planVideoUseTargetedCameraInput = true;
     [SerializeField] private bool planVideoCaptureUi = false;
+    [Header("Plan Video Camera")]
+    [SerializeField] private bool planVideoUseCloseFollowCamera = true;
+    [Min(0.1f)]
+    [SerializeField] private float planVideoCameraDistance = 18f;
+    [SerializeField] private float planVideoCameraYawDegrees = 35f;
+    [Range(5f, 85f)]
+    [SerializeField] private float planVideoCameraPitchDegrees = 24f;
+    [Min(0f)]
+    [SerializeField] private float planVideoCameraFocusHeightOffset = 1.25f;
+    [Min(0f)]
+    [SerializeField] private float planVideoCameraSmoothTime = 0.18f;
 
 #if UNITY_EDITOR
     private RecorderController activePlanVideoRecorderController;
@@ -38,10 +49,17 @@ public partial class ThreeDBrickSim
     private string activePlanVideoOutputPath;
 #endif
 
+    private bool planVideoCloseFollowCameraRequested;
+    private bool planVideoCloseFollowCameraActive;
+    private Vector3 planVideoCameraDesiredFocusPoint;
+    private Vector3 planVideoCameraCurrentFocusPoint;
+    private Vector3 planVideoCameraFocusVelocity;
+
     private void StartPlanExecutionVideoRecording(string planName)
     {
         if (!enablePlanVideoRecording)
         {
+            planVideoCloseFollowCameraRequested = false;
             return;
         }
 
@@ -94,6 +112,7 @@ public partial class ThreeDBrickSim
         {
             Destroy(movieRecorderSettings);
             Destroy(controllerSettings);
+            planVideoCloseFollowCameraRequested = false;
             Debug.LogWarning("StartPlanExecutionVideoRecording: Recorder failed to start.");
             return;
         }
@@ -102,15 +121,19 @@ public partial class ThreeDBrickSim
         activePlanVideoRecorderSettings = controllerSettings;
         activePlanVideoMovieRecorderSettings = movieRecorderSettings;
         activePlanVideoOutputPath = Path.Combine(absoluteOutputDirectory, fileNameWithoutExtension + ".mp4");
+        planVideoCloseFollowCameraRequested = planVideoUseCloseFollowCamera;
 
         Debug.Log($"Plan recording started: {activePlanVideoOutputPath}");
 #else
+        planVideoCloseFollowCameraRequested = false;
         Debug.LogWarning("Plan video recording is only supported in the Unity Editor with com.unity.recorder installed.");
 #endif
     }
 
     private void StopPlanExecutionVideoRecording()
     {
+        DeactivatePlanVideoCamera();
+
 #if UNITY_EDITOR
         if (activePlanVideoRecorderController == null)
         {
@@ -216,6 +239,108 @@ public partial class ThreeDBrickSim
 
         candidate = candidate.Replace(' ', '_');
         return string.IsNullOrWhiteSpace(candidate) ? fallback : candidate;
+    }
+
+    private bool IsPlanVideoCloseFollowCameraActive()
+    {
+        return planVideoCloseFollowCameraActive && controlledCamera != null;
+    }
+
+    private void PreparePlanVideoCameraForPlan(ThreeDBrickSimPlan plan)
+    {
+        if (!planVideoCloseFollowCameraRequested || controlledCamera == null || plan == null || plan.steps == null || plan.steps.Length == 0)
+        {
+            planVideoCloseFollowCameraActive = false;
+            return;
+        }
+
+        Vector3 initialFocusPoint = GetPlanVideoCameraFocusPoint(plan.steps[0]);
+        planVideoCloseFollowCameraActive = true;
+        planVideoCameraDesiredFocusPoint = initialFocusPoint;
+        planVideoCameraCurrentFocusPoint = initialFocusPoint;
+        planVideoCameraFocusVelocity = Vector3.zero;
+        ApplyPlanVideoCameraTransform(initialFocusPoint);
+    }
+
+    private void SetPlanVideoCameraTarget(ThreeDBrickSimPlanStep step, bool snapImmediately)
+    {
+        if (!planVideoCloseFollowCameraRequested || controlledCamera == null || step == null)
+        {
+            return;
+        }
+
+        Vector3 focusPoint = GetPlanVideoCameraFocusPoint(step);
+        planVideoCloseFollowCameraActive = true;
+        planVideoCameraDesiredFocusPoint = focusPoint;
+
+        if (snapImmediately)
+        {
+            planVideoCameraCurrentFocusPoint = focusPoint;
+            planVideoCameraFocusVelocity = Vector3.zero;
+            ApplyPlanVideoCameraTransform(focusPoint);
+        }
+    }
+
+    private void UpdatePlanVideoCamera()
+    {
+        if (!planVideoCloseFollowCameraActive || controlledCamera == null)
+        {
+            return;
+        }
+
+        if (planVideoCameraSmoothTime <= 0f)
+        {
+            planVideoCameraCurrentFocusPoint = planVideoCameraDesiredFocusPoint;
+        }
+        else
+        {
+            planVideoCameraCurrentFocusPoint = Vector3.SmoothDamp(
+                planVideoCameraCurrentFocusPoint,
+                planVideoCameraDesiredFocusPoint,
+                ref planVideoCameraFocusVelocity,
+                planVideoCameraSmoothTime);
+        }
+
+        ApplyPlanVideoCameraTransform(planVideoCameraCurrentFocusPoint);
+    }
+
+    private void DeactivatePlanVideoCamera()
+    {
+        planVideoCloseFollowCameraRequested = false;
+        planVideoCloseFollowCameraActive = false;
+        planVideoCameraDesiredFocusPoint = Vector3.zero;
+        planVideoCameraCurrentFocusPoint = Vector3.zero;
+        planVideoCameraFocusVelocity = Vector3.zero;
+
+        if (controlledCamera != null)
+        {
+            ApplyOrbitCameraTransform();
+        }
+    }
+
+    private Vector3 GetPlanVideoCameraFocusPoint(ThreeDBrickSimPlanStep step)
+    {
+        return step.targetPosition + (Vector3.up * planVideoCameraFocusHeightOffset);
+    }
+
+    private void ApplyPlanVideoCameraTransform(Vector3 focusPoint)
+    {
+        Vector3 cameraPosition = focusPoint + GetPlanVideoCameraOffset();
+        controlledCamera.transform.SetPositionAndRotation(
+            cameraPosition,
+            Quaternion.LookRotation(focusPoint - cameraPosition, Vector3.up));
+    }
+
+    private Vector3 GetPlanVideoCameraOffset()
+    {
+        float yawRadians = planVideoCameraYawDegrees * Mathf.Deg2Rad;
+        float pitchRadians = planVideoCameraPitchDegrees * Mathf.Deg2Rad;
+        float horizontalDistance = Mathf.Cos(pitchRadians) * planVideoCameraDistance;
+
+        return new Vector3(
+            Mathf.Sin(yawRadians) * horizontalDistance,
+            Mathf.Sin(pitchRadians) * planVideoCameraDistance,
+            -Mathf.Cos(yawRadians) * horizontalDistance);
     }
 
     private void OnDisable()

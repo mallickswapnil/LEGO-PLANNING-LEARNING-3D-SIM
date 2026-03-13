@@ -200,6 +200,7 @@ public partial class ThreeDBrickSim : MonoBehaviour
 
     private void Update()
     {
+        UpdatePlanVideoCamera();
         HandleCameraDragInput();
         HandleWallBreakInput();
     }

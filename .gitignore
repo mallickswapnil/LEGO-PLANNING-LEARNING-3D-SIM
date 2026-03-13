@@ -10,6 +10,8 @@ Recordings/
 .vscode/
 .plastic/
 videos/
+__pycache__/
+*.pyc
 *.csproj
 *.sln
 *.slnx

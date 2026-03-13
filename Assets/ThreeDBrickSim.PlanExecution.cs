@@ -33,9 +33,13 @@ public partial class ThreeDBrickSim
                 yield break;
             }
 
+            PreparePlanVideoCameraForPlan(plan);
+            SetPlanVideoCameraTarget(plan.steps[0], snapImmediately: true);
+
             for (int i = 0; i < plan.steps.Length; i++)
             {
                 ThreeDBrickSimPlanStep step = plan.steps[i];
+                SetPlanVideoCameraTarget(step, snapImmediately: false);
                 if (logPlacementDebug)
                 {
                     Debug.Log($"Plan step {i + 1}/{plan.steps.Length}: brick='{step.brickId}', targetPosition={step.targetPosition}, targetRotation={step.targetRotation}.");
